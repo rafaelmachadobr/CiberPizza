@@ -1,0 +1,33 @@
+.bg-pink {
+  background-color: #ff004d;
+}
+
+.color-pink {
+  color: #ff004d;
+}
+
+#main-home .header-top .item a {
+  color: #000;
+}
+
+#main-home .header-top .item a:hover {
+  color: #ff004d;
+}
+
+#main-home .navbar .nav-item {
+    padding: 0 15px;
+}
+
+#main-home .navbar .nav-item .nav-link {
+  color: #000;
+}
+
+#main-home .navbar .nav-item .nav-link:hover {
+  color: #ff004d;
+}
+
+#main-home .navbar .cart-icon {
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
