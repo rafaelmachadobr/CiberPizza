@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,12 +36,14 @@ public class Pedido {
     private Double valor;
 
     @Column(nullable = false)
-    @NotBlank(message = "O status não pode ser vazio")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "O status não pode ser nulo, deve ser um dos seguintes: AGUARDANDO_PAGAMENTO, PAGAMENTO_CONFIRMADO, EM_ANDAMENTO, ENVIADO, ENTREGUE, CANCELADO")
+    private Status status;
 
     @Column(nullable = false)
-    @NotBlank(message = "O pagamento não pode ser vazio")
-    private String pagamento;
+    @NotBlank(message = "O tipo de pagamento não pode ser vazio, deve ser um dos seguintes: DINHEIRO, CARTAO_CREDITO, CARTAO_DEBITO, VALE_ALIMENTACAO, VALE_REFEICAO, PIX")
+    @Enumerated(EnumType.STRING)
+    private Pagamento pagamento;
 
     @ManyToOne
     private Cliente cliente;
