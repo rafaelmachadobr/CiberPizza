@@ -16,7 +16,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -41,7 +40,7 @@ public class Pedido {
     private Status status;
 
     @Column(nullable = false)
-    @NotBlank(message = "O tipo de pagamento não pode ser vazio, deve ser um dos seguintes: DINHEIRO, CARTAO_CREDITO, CARTAO_DEBITO, VALE_ALIMENTACAO, VALE_REFEICAO, PIX")
+    @NotNull(message = "O tipo de pagamento não pode ser nulo, deve ser um dos seguintes: DINHEIRO, CARTAO_CREDITO, CARTAO_DEBITO, VALE_ALIMENTACAO, VALE_REFEICAO, PIX")
     @Enumerated(EnumType.STRING)
     private Pagamento pagamento;
 

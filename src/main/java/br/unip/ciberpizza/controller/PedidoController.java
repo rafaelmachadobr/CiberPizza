@@ -11,19 +11,19 @@ import br.unip.ciberpizza.model.Produto;
 import br.unip.ciberpizza.service.ProdutoService;
 
 @Controller
-@RequestMapping("/")
-public class HomeController {
+@RequestMapping("/pedido")
+public class PedidoController {
     @Autowired
     private final ProdutoService produtoService;
 
-    public HomeController(ProdutoService produtoService) {
+    public PedidoController(ProdutoService produtoService) {
         this.produtoService = produtoService;
     }
 
     @GetMapping
-    public ModelAndView home(@ModelAttribute("produto") Produto produto) {
-        ModelAndView modelAndView = new ModelAndView("home");
-        modelAndView.addObject("listaPizzas", produtoService.listarPizzas());
+    public ModelAndView fazerPedido(@ModelAttribute("produto") Produto produto) {
+        ModelAndView modelAndView = new ModelAndView("pedido");
+        modelAndView.addObject("listaProdutos", produtoService.listarProdutos());
         return modelAndView;
     }
 }

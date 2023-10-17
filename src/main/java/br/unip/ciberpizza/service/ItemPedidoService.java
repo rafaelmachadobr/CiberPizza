@@ -48,4 +48,18 @@ public class ItemPedidoService {
     public void deletarItemPedido(UUID id) {
         itemPedidoRepository.deleteById(id);
     }
+
+    private void calcularPrecoComTamanho(ItemPedido itemPedido) {
+        switch (itemPedido.getTamanho()) {
+            case PEQUENA:
+                itemPedido.setPreco(itemPedido.getProduto().getValor());
+                break;
+            case MEDIA:
+                itemPedido.setPreco(itemPedido.getProduto().getValor() * 1.1);
+                break;
+            case GRANDE:
+                itemPedido.setPreco(itemPedido.getProduto().getValor() * 2);
+                break;
+        }
+    }
 }
