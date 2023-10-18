@@ -15,22 +15,7 @@ INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES ('70b6
 INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES ('b2b6e1bb-e5eb-43ac-b742-295221e758c8', 'Suco de Laranja', 'Suco de laranja natural', 5.00, 'BEBIDA', 'https://assets.vtex.app/unsafe/1020x930/center/middle/https%3A%2F%2Fcarrefourbrfood.vtexassets.com%2Farquivos%2Fids%2F132095437%2Fsuco-de-laranja-integral-refrigerado-natural-one-100--suco-15-litros-1.jpg%3Fv%3D638322173501630000');
 
 -- Inserindo Clientes
-INSERT INTO cliente (id, nome, email, cpf, endereco_entrega, telefone) VALUES ('f4131b6c-94e5-4d7a-9b0e-12c3f43078d0', 'Maria Silva', 'maria@email.com', '123.456.789-01', 'Rua A, 123', '(11) 98765-4321');
-INSERT INTO cliente (id, nome, email, cpf, endereco_entrega, telefone) VALUES ('3e2ac798-bcd5-4bf9-bd1d-bf6f04f2f07a', 'João Santos', 'joao@email.com', '987.654.321-09', 'Av. B, 456', '(22) 12345-6789');
-INSERT INTO cliente (id, nome, email, cpf, endereco_entrega, telefone) VALUES ('6b0c57c5-cc7b-4727-82a4-fb3738946e14', 'Ana Oliveira', 'ana@email.com', '234.567.890-12', 'Rua C, 789', '(33) 98765-4321');
-INSERT INTO cliente (id, nome, email, cpf, endereco_entrega, telefone) VALUES ('ea135b8e-50ca-41d1-87f3-3c86f6c5e315', 'Pedro Pereira', 'pedro@email.com', '543.210.987-09', 'Av. D, 567', '(44) 12345-6789');
-INSERT INTO cliente (id, nome, email, cpf, endereco_entrega, telefone) VALUES ('f868ca93-65ed-45cc-91f4-3c8db0346a67', 'Carla Costa', 'carla@email.com', '321.654.987-12', 'Rua E, 123', '(55) 98765-4321');
-
--- Inserindo Pedido
-INSERT INTO pedido (numero, momento, valor, status, pagamento, cliente_id) VALUES ('0d783a3f-57ec-4b35-b173-32d2d7d5f13a', '2023-10-15 14:00:00', 58.00, 'EM_ANDAMENTO', 'CARTAO_CREDITO', 'f4131b6c-94e5-4d7a-9b0e-12c3f43078d0');
-INSERT INTO pedido (numero, momento, valor, status, pagamento, cliente_id) VALUES ('1d782a3f-57ec-4b35-b173-32d2d7d5f13a', '2023-10-15 14:15:00', 69.00, 'EM_ANDAMENTO', 'DINHEIRO', '3e2ac798-bcd5-4bf9-bd1d-bf6f04f2f07a');
-INSERT INTO pedido (numero, momento, valor, status, pagamento, cliente_id) VALUES ('2c78a3f3-57ec-4b35-b173-32d2d7d5f13a', '2023-10-15 14:30:00', 22.00, 'ENTREGUE', 'CARTAO_CREDITO', '6b0c57c5-cc7b-4727-82a4-fb3738946e14');
-INSERT INTO pedido (numero, momento, valor, status, pagamento, cliente_id) VALUES ('3d781a3f-57ec-4b35-b173-32d2d7d5f13a', '2023-10-15 14:45:00', 52.00, 'ENTREGUE', 'PIX', 'ea135b8e-50ca-41d1-87f3-3c86f6c5e315');
-INSERT INTO pedido (numero, momento, valor, status, pagamento, cliente_id) VALUES ('4d783a3f-57ec-4b35-b173-32d2d7d5f13a', '2023-10-15 15:00:00', 25.00, 'CANCELADO', 'DINHEIRO', 'f868ca93-65ed-45cc-91f4-3c8db0346a67');
-
--- Inserindo ItemPedido
-INSERT INTO item_pedido (id, quantidade, tamanho, pedido_numero, produto_id) VALUES ('9c1b6c3f-4131-4e94-7a9b-0e12c3f43078', 2, 'MEDIA', '0d783a3f-57ec-4b35-b173-32d2d7d5f13a', 'd35b56d9-e3c8-48cc-a9e0-e95159c5d1e1');
-INSERT INTO item_pedido (id, quantidade, tamanho, pedido_numero, produto_id) VALUES ('8e2ac798-bcd5-4bf9-bd1d-bf6f04f2f07a', 3, 'PEQUENA', '1d782a3f-57ec-4b35-b173-32d2d7d5f13a', '69a1100e-2ee9-4a74-9a77-6be8ac7abbc5');
-INSERT INTO item_pedido (id, quantidade, tamanho, pedido_numero, produto_id) VALUES ('5c0c57c5-cc7b-4727-82a4-fb3738946e14', 1, 'MEDIA', '2c78a3f3-57ec-4b35-b173-32d2d7d5f13a', '4508ecec-ec2a-4b6c-a4cb-5403a56b9187');
-INSERT INTO item_pedido (id, quantidade, tamanho, pedido_numero, produto_id) VALUES ('8a135b8e-50ca-41d1-87f3-3c86f6c5e315', 2, 'GRANDE', '3d781a3f-57ec-4b35-b173-32d2d7d5f13a', 'a501ca46-0101-4c04-b3db-197a95be1541');
-INSERT INTO item_pedido (id, quantidade, tamanho, pedido_numero, produto_id) VALUES ('5f868ca9-365e-45cc-91f4-3c8db0346a67', 1, 'PEQUENA', '4d783a3f-57ec-4b35-b173-32d2d7d5f13a', '70b6e1bb-e5eb-43ac-b742-295221e758c9');
+INSERT INTO cliente (id, nome, email, cpf, endereco_entrega, telefone) VALUES (UUID(), 'João Santos', 'joao@email.com', '987.654.321-09', 'Av. B, 456', '(22) 12345-6789');
+INSERT INTO cliente (id, nome, email, cpf, endereco_entrega, telefone) VALUES (UUID(), 'Ana Oliveira', 'ana@email.com', '234.567.890-12', 'Rua C, 789', '(33) 98765-4321');
+INSERT INTO cliente (id, nome, email, cpf, endereco_entrega, telefone) VALUES (UUID(), 'Pedro Pereira', 'pedro@email.com', '543.210.987-09', 'Av. D, 567', '(44) 12345-6789');
+INSERT INTO cliente (id, nome, email, cpf, endereco_entrega, telefone) VALUES (UUID(), 'Carla Costa', 'carla@email.com', '321.654.987-12', 'Rua E, 123', '(55) 98765-4321');
