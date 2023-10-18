@@ -26,11 +26,11 @@ public class ItemPedidoService {
         return itemPedidoRepository.findAll();
     }
 
-    public ItemPedido encontrarItemPedidoPorId(UUID id) {
+    public ItemPedido encontrarItemPedidoPorId(String id) {
         return itemPedidoRepository.findById(id).orElse(null);
     }
 
-    public ItemPedido atualizarItemPedido(UUID id, ItemPedido itemPedidoAtualizado) {
+    public ItemPedido atualizarItemPedido(String id, ItemPedido itemPedidoAtualizado) {
         ItemPedido itemPedidoExistente = itemPedidoRepository.findById(id).orElse(null);
 
         if (itemPedidoExistente != null) {
@@ -45,7 +45,7 @@ public class ItemPedidoService {
         }
     }
 
-    public void deletarItemPedido(UUID id) {
+    public void deletarItemPedido(String id) {
         itemPedidoRepository.deleteById(id);
     }
 

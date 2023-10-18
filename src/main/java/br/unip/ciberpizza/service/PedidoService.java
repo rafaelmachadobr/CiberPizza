@@ -26,11 +26,11 @@ public class PedidoService {
         return pedidoRepository.findAll();
     }
 
-    public Pedido encontrarPedidoPorNumero(UUID numero) {
+    public Pedido encontrarPedidoPorNumero(String numero) {
         return pedidoRepository.findById(numero).orElse(null);
     }
 
-    public Pedido atualizarPedido(UUID numero, Pedido pedidoAtualizado) {
+    public Pedido atualizarPedido(String numero, Pedido pedidoAtualizado) {
         Pedido pedidoExistente = pedidoRepository.findById(numero).orElse(null);
 
         if (pedidoExistente != null) {
@@ -46,7 +46,7 @@ public class PedidoService {
         }
     }
 
-    public void deletarPedido(UUID numero) {
+    public void deletarPedido(String numero) {
         pedidoRepository.deleteById(numero);
     }
 }

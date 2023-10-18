@@ -26,11 +26,27 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
-    public Cliente encontrarClientePorId(UUID id) {
+    public Cliente encontrarClientePorId(String id) {
         return clienteRepository.findById(id).orElse(null);
     }
 
-    public Cliente atualizarCliente(UUID id, Cliente clienteAtualizado) {
+    public Cliente encontrarClientePorEmailECpf(String email, String cpf) {
+        return clienteRepository.findByEmailAndCpf(email, cpf);
+    }
+
+    public Cliente encontrarClientePorCpf(String cpf) {
+        return clienteRepository.findByCpf(cpf);
+    }
+
+    public Cliente encontrarClientePorEmail(String email) {
+        return clienteRepository.findByEmail(email);
+    }
+
+    public Cliente encontrarClientePorTelefone(String telefone) {
+        return clienteRepository.findByTelefone(telefone);
+    }
+
+    public Cliente atualizarCliente(String id, Cliente clienteAtualizado) {
         Cliente clienteExistente = clienteRepository.findById(id).orElse(null);
 
         if (clienteExistente != null) {
@@ -46,7 +62,7 @@ public class ClienteService {
         }
     }
 
-    public void deletarCliente(UUID id) {
+    public void deletarCliente(String id) {
         clienteRepository.deleteById(id);
     }
 }

@@ -39,15 +39,15 @@ public class ProdutoService {
         return pizzas;
     }
 
-    public Produto encontrarProdutoPorId(UUID id) {
+    public Produto encontrarProdutoPorId(String id) {
         return produtoRepository.findById(id).orElse(null);
     }
 
-    public void deletarProduto(UUID id) {
+    public void deletarProduto(String id) {
         produtoRepository.deleteById(id);
     }
 
-    public Produto atualizarProduto(UUID id, Produto produtoAtualizado) {
+    public Produto atualizarProduto(String id, Produto produtoAtualizado) {
         Produto produtoExistente = produtoRepository.findById(id).orElse(null);
 
         if (produtoExistente != null) {
