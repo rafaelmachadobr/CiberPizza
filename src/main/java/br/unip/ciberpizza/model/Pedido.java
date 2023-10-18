@@ -2,7 +2,6 @@ package br.unip.ciberpizza.model;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,7 +23,7 @@ import lombok.Data;
 public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID numero;
+    private String numero;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date momento;

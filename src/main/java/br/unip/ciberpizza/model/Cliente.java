@@ -1,7 +1,6 @@
 package br.unip.ciberpizza.model;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -21,7 +20,7 @@ import lombok.Data;
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private String id;
 
     @Column(nullable = false)
     @NotBlank(message = "O nome não pode ser vazio")
@@ -34,7 +33,7 @@ public class Cliente {
 
     @Column(unique = true, nullable = false)
     @NotBlank(message = "O CPF não pode ser vazio")
-    @CPF(message = "O CPF deve ser válido, no formato xxx.xxx.xxx-xx")
+    @Pattern(regexp = "[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{2}", message = "O CPF deve ser válido, no formato xxx.xxx.xxx-xx")
     private String cpf;
 
     @Column(nullable = false)
@@ -48,4 +47,15 @@ public class Cliente {
 
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos;
+
+    public Cliente() {
+    }
+
+    public Cliente(String nome, String email, String cpf, String enderecoEntrega, String telefone) {
+        this.nome = nome;
+        this.email = email;
+        this.cpf = cpf;
+        this.enderecoEntrega = enderecoEntrega;
+        this.telefone = telefone;
+    }
 }

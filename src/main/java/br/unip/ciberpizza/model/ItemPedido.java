@@ -1,7 +1,5 @@
 package br.unip.ciberpizza.model;
 
-import java.util.UUID;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -20,7 +18,7 @@ import lombok.Data;
 public class ItemPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private String id;
 
     @Column(nullable = false)
     @NotNull(message = "O pedido não pode ser nulo")
