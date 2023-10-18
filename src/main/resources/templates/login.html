@@ -81,27 +81,14 @@
                   >Início</a
                 >
               </li>
-
               <li class="nav-item">
-                <a
-                  class="nav-link"
-                  th:href="@{'/#sobre?idCliente=' + ${idCliente}}"
-                  >Sobre</a
-                >
+                <a class="nav-link" href="/#sobre">Sobre</a>
               </li>
               <li class="nav-item">
-                <a
-                  class="nav-link"
-                  th:href="@{'/#cardapio?idCliente=' + ${idCliente}}"
-                  >Cardápio
-                </a>
+                <a class="nav-link" href="/#cardapio">Cardápio </a>
               </li>
               <li class="nav-item">
-                <a
-                  class="nav-link"
-                  th:href="@{'/#avaliacoes?idCliente=' + ${idCliente}}"
-                  >Avaliações</a
-                >
+                <a class="nav-link" href="/#avaliacoes">Avaliações</a>
               </li>
               <li class="nav-item dropdown">
                 <a
@@ -156,105 +143,93 @@
     </header>
 
     <div class="container py-5">
-      <div class="jumbotron">
-        <h1>Faça seu pedido</h1>
-        <p>
-          Selecione as pizzas e as bebidas abaixo para adicioná-las ao seu
-          pedido!
-        </p>
-      </div>
-      <div class="row">
-        <div class="col-md-8 col-md-push-4">
-          <div class="panel panel-default rounded" id="pizza-selector">
-            <div class="panel-body">
-              <div
-                class="row row-cols-1 row-cols-md-3 my-2 align-items-center justify-content-center gy-4"
+      <section class="vh-100">
+        <div class="container py-5 h-100">
+          <div
+            class="row d-flex align-items-center justify-content-center h-100"
+          >
+            <div class="col-md-8 col-lg-7 col-xl-6">
+              <img
+                src="assets/img/logo.png"
+                class="img-fluid"
+                alt="Phone image"
+              />
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+              <form
+                class="p-3 p-md-4 g-3 needs-validation email-form"
+                th:action="@{/login}"
+                method="post"
+                novalidate
+                th:object="${loginDTO}"
               >
-                <div th:each="produto : ${listaProdutos}">
-                  <div class="col">
-                    <div class="card h-100">
-                      <img
-                        th:src="${produto.urlImagem}"
-                        class="card-img-top"
-                        alt="Imagem da Pizza"
-                      />
-                      <div class="card-body py-2" style="min-height: 150px">
-                        <h5 class="card-title" th:text="${produto.nome}">
-                          Nome da Pizza
-                        </h5>
-                        <p class="card-text" th:text="${produto.descricao}">
-                          Descrição da Pizza
-                        </p>
-                      </div>
-                      <button
-                        type="button"
-                        class="btn"
-                        data-bs-toggle="modal"
-                        th:data-bs-target="'#pizzaModal' + ${produto.id}"
-                        data-id="${produto.id}"
-                      >
-                        Ver Detalhes
-                      </button>
-                    </div>
+                <div class="form-outline mb-4">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    th:field="*{email}"
+                    name="email"
+                    aria-describedby="emailHelp"
+                    th:classappend="${#fields.hasErrors('email')}? 'is-invalid' : ''"
+                    placeholder="Digite seu email"
+                  />
+                  <div class="valid-feedback">Parece bom!</div>
+                  <div class="invalid-feedback">
+                    <span
+                      th:if="${#fields.hasErrors('email')}"
+                      th:errors="*{email}"
+                    ></span>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div class="col-md-4 col-md-pull-8 my-2">
-          <div class="panel panel-default rounded">
-            <div class="panel-body">
-              <p>Option for pickup or delivery and a place for information.</p>
-
-              <form role="form" method="post" action="orders.html">
-                <div class="radio">
-                  <label>
-                    <input
-                      type="radio"
-                      name="method"
-                      id="method_pickup"
-                      value="pickup"
-                      checked
-                    />
-                    Pickup
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input
-                      type="radio"
-                      name="method"
-                      id="method_delivery"
-                      value="delivery"
-                    />
-                    Delivery <kbd class="price">$0.00</kbd>
-                  </label>
-                </div>
-
-                <div class="form-group">
-                  <label class="sr-only" for="name">Customer Name</label>
+                <div class="form-outline mb-4">
+                  <label for="cpf" class="form-label">CPF</label>
                   <input
                     type="text"
-                    class="form-control"
-                    id="name"
-                    name="name"
-                    placeholder="Customer Name"
-                    required
+                    class="form-control cpf"
+                    th:field="*{cpf}"
+                    name="cpf"
+                    aria-describedby="cpfHelp"
+                    th:classappend="${#fields.hasErrors('cpf')}? 'is-invalid' : ''"
+                    placeholder="Digite seu CPF"
                   />
+                  <div class="valid-feedback">Parece bom!</div>
+                  <div class="invalid-feedback">
+                    <span
+                      th:if="${#fields.hasErrors('cpf')}"
+                      th:errors="*{cpf}"
+                    ></span>
+                  </div>
                 </div>
 
-                <table class="table" id="order"></table>
+                <div th:if="${param.error}">
+                  <p class="alert alert-danger">Email ou CPF inválidos.</p>
+                </div>
 
-                <button type="submit" class="btn btn-default btn-lg">
-                  Place Order <i class="glyphicon glyphicon-chevron-right"></i>
-                </button>
+                <div
+                  class="d-flex justify-content-between align-items-center mb-4"
+                >
+                  <div>
+                    <input type="checkbox" id="lembrar" />
+                    <label class="form-check-label" for="lembrar">
+                      Lembre-me
+                    </label>
+                  </div>
+                  <a href="#">Esqueceu sua senha?</a>
+                </div>
+
+                <button type="submit" class="btn w-100">Entrar</button>
+
+                <p class="text-center text-muted mt-5 mb-0">
+                  Não tem uma conta? <a href="/criar-conta">Cadastre-se</a>
+                </p>
               </form>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
 
     <footer id="footer" class="footer">
@@ -330,57 +305,6 @@
       </div>
     </footer>
 
-    <div
-      th:each="produto : ${listaProdutos}"
-      class="modal fade"
-      th:id="'pizzaModal' + ${produto.id}"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="pizzaModalLabel"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" th:text="${produto.nome}">
-              Nome da Pizza
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col">
-                <img
-                  class="img-fluid"
-                  th:src="${produto.urlImagem}"
-                  alt="Imagem do Produto"
-                />
-              </div>
-              <div class="col">
-                <p th:text="${produto.descricao}"></p>
-                <p th:text="${produto.valor}"></p>
-                <p th:text="${produto.tipo}"></p>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Understood</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <button class="scroll-top d-flex align-items-center justify-content-center">
       <i class="fa-solid fa-arrow-up"></i>
     </button>
@@ -388,6 +312,7 @@
     <div id="preloader"></div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="assets/js/script.js"></script>
