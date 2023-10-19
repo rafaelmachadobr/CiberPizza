@@ -136,4 +136,34 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  $(document).ready(function () {
+    $("#mostrarConfirmarSenha").click(function () {
+      var confirmarSenhaInput = $("#confirmarSenha");
+
+      if (confirmarSenhaInput.attr("type") === "password") {
+        confirmarSenhaInput.attr("type", "text");
+        $("#mostrarConfirmarSenha i")
+          .removeClass("bi-eye-slash")
+          .addClass("bi-eye");
+      } else {
+        confirmarSenhaInput.attr("type", "password");
+        $("#mostrarConfirmarSenha i")
+          .removeClass("bi-eye")
+          .addClass("bi-eye-slash");
+      }
+    });
+  });
+
+  $("select#tamanho").change(function () {
+    var tamanho = $(this).val();
+    var valorPizza = $("#valor-pizza").val();
+
+    console.log(tamanho);
+    console.log(valorPizza);
+  });
+
+  $("input#quantidade").ready(function () {
+    var quantidade = $(this).val(1);
+  });
 });

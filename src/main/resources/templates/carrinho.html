@@ -60,7 +60,7 @@
       </div>
       <nav class="navbar navbar-expand-lg pb-2 pt-0">
         <div class="container">
-          <a class="navbar-brand" href="/">
+          <a class="navbar-brand" th:href="@{'/?idCliente=' + ${idCliente}}">
             <h2 class="red-text">Ciber<span class="green-text">Pizza</span></h2>
           </a>
           <button
@@ -77,18 +77,31 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
               <li class="nav-item">
-                <a class="nav-link" href="/"
+                <a class="nav-link" th:href="@{'/?idCliente=' + ${idCliente}}"
                   >Início</a
                 >
               </li>
+
               <li class="nav-item">
-                <a class="nav-link" href="/#sobre">Sobre</a>
+                <a
+                  class="nav-link"
+                  th:href="@{'/#sobre?idCliente=' + ${idCliente}}"
+                  >Sobre</a
+                >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/#cardapio">Cardápio </a>
+                <a
+                  class="nav-link"
+                  th:href="@{'/#cardapio?idCliente=' + ${idCliente}}"
+                  >Cardápio
+                </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/#avaliacoes">Avaliações</a>
+                <a
+                  class="nav-link"
+                  th:href="@{'/#avaliacoes?idCliente=' + ${idCliente}}"
+                  >Avaliações</a
+                >
               </li>
               <li class="nav-item dropdown">
                 <a
@@ -141,99 +154,6 @@
         </div>
       </nav>
     </header>
-
-    <div class="container py-5">
-      <section class="vh-100">
-        <div class="container py-5 h-100">
-          <div
-            class="row d-flex align-items-center justify-content-center h-100"
-          >
-            <div class="col-md-8 col-lg-7 col-xl-6">
-              <img
-                src="assets/img/logo.png"
-                class="img-fluid"
-                alt="Phone image"
-              />
-            </div>
-            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-              <form
-                class="p-3 p-md-4 g-3 needs-validation email-form"
-                th:action="@{/login}"
-                method="post"
-                novalidate
-                th:object="${loginDTO}"
-              >
-                <div class="form-outline mb-4">
-                  <label for="email" class="form-label">Email</label>
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="email"
-                    th:field="*{email}"
-                    name="email"
-                    aria-describedby="emailHelp"
-                    th:classappend="${#fields.hasErrors('email')}? 'is-invalid' : ''"
-                    placeholder="Digite seu email"
-                  />
-                  <div class="valid-feedback">Parece bom!</div>
-                  <div class="invalid-feedback">
-                    <span
-                      th:if="${#fields.hasErrors('email')}"
-                      th:errors="*{email}"
-                    ></span>
-                  </div>
-                </div>
-
-                <div class="form-outline mb-4">
-                  <label for="senha" class="form-label">Senha</label>
-                  <div class="input-group">
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="senha"
-                      th:field="*{senha}"
-                      name="senha"
-                      aria-describedby="senhaHelp"
-                      th:classappend="${#fields.hasErrors('senha')} ? 'is-invalid' : ''"
-                      placeholder="Digite sua senha"
-                    />
-                    <button
-                      class="btn btn-outline-secondary"
-                      type="button"
-                      id="mostrarSenha"
-                    >
-                      <i class="bi bi-eye-slash"></i>
-                    </button>
-                  </div>
-                </div>
-
-                <div th:if="${param.error}">
-                  <p class="alert alert-danger">Email ou Senha inválidos.</p>
-                </div>
-
-                <div
-                  class="d-flex justify-content-between align-items-center mb-4"
-                >
-                  <div>
-                    <input type="checkbox" id="lembrar" />
-                    <label class="form-check-label" for="lembrar">
-                      Lembre-me
-                    </label>
-                  </div>
-                  <a href="#">Esqueceu sua senha?</a>
-                </div>
-
-                <button type="submit" class="btn w-100">Entrar</button>
-
-                <p class="text-center text-muted mt-5 mb-0">
-                  Não tem uma conta? <a href="/cadastro">Cadastre-se</a>
-                </p>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
 
     <footer id="footer" class="footer">
       <div class="container">
