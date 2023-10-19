@@ -8,7 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
@@ -36,6 +35,17 @@ public class ItemPedido {
     @ManyToOne
     private Produto produto;
 
-    @Transient
+    @Column(nullable = false)
     private double preco;
+
+    public ItemPedido() {
+    }
+
+    public ItemPedido(int quantidade, Tamanho tamanho, Pedido pedido, Produto produto, double preco) {
+        this.quantidade = quantidade;
+        this.tamanho = tamanho;
+        this.pedido = pedido;
+        this.produto = produto;
+        this.preco = preco;
+    }
 }
