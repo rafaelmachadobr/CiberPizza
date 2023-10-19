@@ -54,7 +54,7 @@ public class LoginController {
             return "login";
         }
 
-        Cliente cliente = clienteService.encontrarClientePorEmailECpf(loginDTO.email(), loginDTO.cpf());
+        Cliente cliente = clienteService.encontrarClientePorEmailESenha(loginDTO.email(), loginDTO.senha());
 
         if (cliente == null) {
             return "redirect:/login?error=true";

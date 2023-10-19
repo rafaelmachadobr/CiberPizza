@@ -30,8 +30,8 @@ public class ClienteService {
         return clienteRepository.findById(id).orElse(null);
     }
 
-    public Cliente encontrarClientePorEmailECpf(String email, String cpf) {
-        return clienteRepository.findByEmailAndCpf(email, cpf);
+    public Cliente encontrarClientePorEmailESenha(String email, String senha) {
+        return clienteRepository.findByEmailAndSenha(email, senha);
     }
 
     public Cliente encontrarClientePorCpf(String cpf) {

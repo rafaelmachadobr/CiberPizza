@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import br.unip.ciberpizza.model.Cliente;
 
 public interface ClienteRepository extends JpaRepository<Cliente, String> {
-    Cliente findByEmailAndCpf(String email, String cpf);
+    Cliente findByEmailAndSenha(String email, String senha);
 
     Cliente findByCpf(String cpf);
 

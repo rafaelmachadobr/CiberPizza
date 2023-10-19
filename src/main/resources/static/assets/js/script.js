@@ -121,4 +121,19 @@ document.addEventListener("DOMContentLoaded", () => {
     $(".cpf").mask("000.000.000-00", { reverse: true });
     $("#telefone").mask("(00) 00000-0000");
   });
+
+  $(document).ready(function () {
+    $("#mostrarSenha").click(function () {
+      var senhaInput = $("#senha");
+      var icon = $("#mostrarSenha i");
+
+      if (senhaInput.prop("type") == "password") {
+        senhaInput.prop("type", "text");
+        icon.removeClass("bi-eye-slash").addClass("bi-eye");
+      } else {
+        senhaInput.prop("type", "password");
+        icon.removeClass("bi-eye").addClass("bi-eye-slash");
+      }
+    });
+  });
 });

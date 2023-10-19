@@ -257,6 +257,36 @@
               </div>
             </div>
 
+            <div class="form-outline mb-4">
+              <label for="senha" class="form-label">Senha</label>
+              <div class="input-group">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="senha"
+                  th:field="*{senha}"
+                  name="senha"
+                  aria-describedby="senhaHelp"
+                  th:classappend="${#fields.hasErrors('senha')} ? 'is-invalid' : ''"
+                  placeholder="Digite sua senha"
+                />
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  id="mostrarSenha"
+                >
+                  <i class="bi bi-eye-slash"></i>
+                </button>
+              </div>
+              <div class="valid-feedback">Parece bom!</div>
+              <div class="invalid-feedback">
+                <span
+                  th:if="${#fields.hasErrors('senha')}"
+                  th:errors="*{senha}"
+                ></span>
+              </div>
+            </div>
+
             <button type="submit" class="btn w-100">Entrar</button>
 
             <p class="text-center text-muted mt-4 mb-0">

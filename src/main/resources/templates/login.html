@@ -185,27 +185,30 @@
                 </div>
 
                 <div class="form-outline mb-4">
-                  <label for="cpf" class="form-label">CPF</label>
-                  <input
-                    type="text"
-                    class="form-control cpf"
-                    th:field="*{cpf}"
-                    name="cpf"
-                    aria-describedby="cpfHelp"
-                    th:classappend="${#fields.hasErrors('cpf')}? 'is-invalid' : ''"
-                    placeholder="Digite seu CPF"
-                  />
-                  <div class="valid-feedback">Parece bom!</div>
-                  <div class="invalid-feedback">
-                    <span
-                      th:if="${#fields.hasErrors('cpf')}"
-                      th:errors="*{cpf}"
-                    ></span>
+                  <label for="senha" class="form-label">Senha</label>
+                  <div class="input-group">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="senha"
+                      th:field="*{senha}"
+                      name="senha"
+                      aria-describedby="senhaHelp"
+                      th:classappend="${#fields.hasErrors('senha')} ? 'is-invalid' : ''"
+                      placeholder="Digite sua senha"
+                    />
+                    <button
+                      class="btn btn-outline-secondary"
+                      type="button"
+                      id="mostrarSenha"
+                    >
+                      <i class="bi bi-eye-slash"></i>
+                    </button>
                   </div>
                 </div>
 
                 <div th:if="${param.error}">
-                  <p class="alert alert-danger">Email ou CPF inválidos.</p>
+                  <p class="alert alert-danger">Email ou Senha inválidos.</p>
                 </div>
 
                 <div

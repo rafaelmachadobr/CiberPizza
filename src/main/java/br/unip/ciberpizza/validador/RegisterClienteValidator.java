@@ -41,6 +41,9 @@ public class RegisterClienteValidator implements Validator {
         if (register.telefone().isEmpty()) {
             errors.rejectValue("telefone", "telefone.vazio");
         }
+        if (register.senha().isEmpty()) {
+            errors.rejectValue("senha", "senha.vazio");
+        }
 
         if (!isEmailValido(register.email())) {
             errors.rejectValue("email", "email.invalido");
@@ -64,6 +67,10 @@ public class RegisterClienteValidator implements Validator {
 
         if (isTelefoneJaCadastrado(register.telefone())) {
             errors.rejectValue("telefone", "telefone.jaCadastrado");
+        }
+
+        if (!isSenhaValida(register.senha())) {
+            errors.rejectValue("senha", "senha.invalida");
         }
     }
 
@@ -89,5 +96,9 @@ public class RegisterClienteValidator implements Validator {
 
     private boolean isTelefoneJaCadastrado(String telefone) {
         return clienteService.encontrarClientePorTelefone(telefone) != null;
+    }
+
+    private boolean isSenhaValida(String senha) {
+        return senha.matches("^[a-zA-Z0-9]{8,}$");
     }
 }

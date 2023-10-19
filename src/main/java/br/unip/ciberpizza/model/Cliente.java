@@ -2,8 +2,6 @@ package br.unip.ciberpizza.model;
 
 import java.util.List;
 
-import org.hibernate.validator.constraints.br.CPF;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -45,17 +43,23 @@ public class Cliente {
     @Pattern(regexp = "\\([0-9]{2}\\) [0-9]{4,5}-[0-9]{4}", message = "O telefone deve ser válido, no formato (xx) xxxx-xxxx ou (xx) xxxxx-xxxx")
     private String telefone;
 
+    @Column(nullable = false)
+    @NotBlank(message = "A senha não pode ser vazia")
+    @Pattern(regexp = "[a-zA-Z0-9]{8,}", message = "A senha deve ter pelo menos 8 caracteres, podendo ser letras ou números")
+    private String senha;
+
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos;
 
     public Cliente() {
     }
 
-    public Cliente(String nome, String email, String cpf, String enderecoEntrega, String telefone) {
+    public Cliente(String nome, String email, String cpf, String enderecoEntrega, String telefone, String senha) {
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
         this.enderecoEntrega = enderecoEntrega;
         this.telefone = telefone;
+        this.senha = senha;
     }
 }

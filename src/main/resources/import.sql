@@ -15,7 +15,7 @@ INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES ('70b6
 INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES ('b2b6e1bb-e5eb-43ac-b742-295221e758c8', 'Suco de Laranja', 'Suco de laranja natural', 5.00, 'BEBIDA', 'https://assets.vtex.app/unsafe/1020x930/center/middle/https%3A%2F%2Fcarrefourbrfood.vtexassets.com%2Farquivos%2Fids%2F132095437%2Fsuco-de-laranja-integral-refrigerado-natural-one-100--suco-15-litros-1.jpg%3Fv%3D638322173501630000');
 
 -- Inserindo Clientes
-INSERT INTO cliente (id, nome, email, cpf, endereco_entrega, telefone) VALUES (UUID(), 'João Santos', 'joao@email.com', '987.654.321-09', 'Av. B, 456', '(22) 12345-6789');
-INSERT INTO cliente (id, nome, email, cpf, endereco_entrega, telefone) VALUES (UUID(), 'Ana Oliveira', 'ana@email.com', '234.567.890-12', 'Rua C, 789', '(33) 98765-4321');
-INSERT INTO cliente (id, nome, email, cpf, endereco_entrega, telefone) VALUES (UUID(), 'Pedro Pereira', 'pedro@email.com', '543.210.987-09', 'Av. D, 567', '(44) 12345-6789');
-INSERT INTO cliente (id, nome, email, cpf, endereco_entrega, telefone) VALUES (UUID(), 'Carla Costa', 'carla@email.com', '321.654.987-12', 'Rua E, 123', '(55) 98765-4321');
+INSERT INTO cliente (id, nome, email, cpf, endereco_entrega, telefone, senha) VALUES (UUID(), 'João Santos', 'joao@email.com', '987.654.321-09', 'Av. B, 456', '(22) 12345-6789', '12345678');
+INSERT INTO cliente (id, nome, email, cpf, endereco_entrega, telefone, senha) VALUES (UUID(), 'Ana Oliveira', 'ana@email.com', '234.567.890-12', 'Rua C, 789', '(33) 98765-4321', '12345678');
+INSERT INTO cliente (id, nome, email, cpf, endereco_entrega, telefone, senha) VALUES (UUID(), 'Pedro Pereira', 'pedro@email.com', '543.210.987-09', 'Av. D, 567', '(44) 12345-6789', '12345678');
+INSERT INTO cliente (id, nome, email, cpf, endereco_entrega, telefone, senha) VALUES (UUID(), 'Carla Costa', 'carla@email.com', '321.654.987-12', 'Rua E, 123', '(55) 98765-4321', '12345678');

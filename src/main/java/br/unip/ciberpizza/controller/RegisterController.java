@@ -34,7 +34,7 @@ public class RegisterController {
     @GetMapping
     public ModelAndView register(@RequestParam(name = "idCliente", required = false) String idCliente) {
         ModelAndView modelAndView = new ModelAndView("register");
-        modelAndView.addObject("registerDTO", new RegisterDTO(null, null, null, null, null));
+        modelAndView.addObject("registerDTO", new RegisterDTO(null, null, null, null, null, null));
 
         if (idCliente != null) {
             Cliente cliente = clienteService.encontrarClientePorId(idCliente);
@@ -58,7 +58,7 @@ public class RegisterController {
         System.out.println(registerDTO.nome());
 
         Cliente cliente = new Cliente(registerDTO.nome(), registerDTO.email(), registerDTO.cpf(),
-                registerDTO.enderecoEntrega(), registerDTO.telefone());
+                registerDTO.enderecoEntrega(), registerDTO.telefone(), registerDTO.senha());
 
         clienteService.salvarCliente(cliente);
 
