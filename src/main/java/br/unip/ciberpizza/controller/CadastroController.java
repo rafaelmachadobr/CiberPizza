@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.unip.ciberpizza.dto.RegisterDTO;
@@ -18,23 +17,23 @@ import br.unip.ciberpizza.validador.RegisterClienteValidator;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/criar-conta")
-public class RegisterController {
+@RequestMapping("/cadastro")
+public class CadastroController {
     @Autowired
     private final ClienteService clienteService;
 
     @Autowired
     private final RegisterClienteValidator clienteValidador;
 
-    public RegisterController(ClienteService clienteService, RegisterClienteValidator clienteValidador) {
+    public CadastroController(ClienteService clienteService, RegisterClienteValidator clienteValidador) {
         this.clienteService = clienteService;
         this.clienteValidador = clienteValidador;
     }
 
     @GetMapping
     public ModelAndView register(@RequestParam(name = "idCliente", required = false) String idCliente) {
-        ModelAndView modelAndView = new ModelAndView("register");
-        modelAndView.addObject("registerDTO", new RegisterDTO(null, null, null, null, null, null));
+        ModelAndView modelAndView = new ModelAndView("cadastro");
+        modelAndView.addObject("registerDTO", new RegisterDTO(null, null, null, null, null, null, null));
 
         if (idCliente != null) {
             Cliente cliente = clienteService.encontrarClientePorId(idCliente);
@@ -52,10 +51,12 @@ public class RegisterController {
         clienteValidador.validate(registerDTO, errors);
 
         if (errors.hasErrors()) {
-            return "register";
+            return "cadastro";
         }
 
-        System.out.println(registerDTO.nome());
+        if (!registerDTO.senha().equals(registerDTO.confirmarSenha())) {
+            return "redirect:/cadastro?error=true";
+        }
 
         Cliente cliente = new Cliente(registerDTO.nome(), registerDTO.email(), registerDTO.cpf(),
                 registerDTO.enderecoEntrega(), registerDTO.telefone(), registerDTO.senha());

@@ -27,7 +27,6 @@ public class HomeController {
         ModelAndView modelAndView = new ModelAndView("home");
 
         if (idCliente != null) {
-            System.out.println("ID DO CLIENTE: " + idCliente);
             modelAndView.addObject("idCliente", idCliente);
         }
 
