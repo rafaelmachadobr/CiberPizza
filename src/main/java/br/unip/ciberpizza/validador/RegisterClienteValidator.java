@@ -44,6 +44,9 @@ public class RegisterClienteValidator implements Validator {
         if (register.senha().isEmpty()) {
             errors.rejectValue("senha", "senha.vazio");
         }
+        if (register.confirmarSenha().isEmpty()) {
+            errors.rejectValue("confirmarSenha", "confirmarSenha.vazio");
+        }
 
         if (!isEmailValido(register.email())) {
             errors.rejectValue("email", "email.invalido");
@@ -71,6 +74,10 @@ public class RegisterClienteValidator implements Validator {
 
         if (!isSenhaValida(register.senha())) {
             errors.rejectValue("senha", "senha.invalida");
+        }
+
+        if (!isSenhaValida(register.confirmarSenha())) {
+            errors.rejectValue("confirmarSenha", "confirmarSenha.invalida");
         }
     }
 
