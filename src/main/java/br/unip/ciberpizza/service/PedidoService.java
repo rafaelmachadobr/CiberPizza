@@ -1,11 +1,11 @@
 package br.unip.ciberpizza.service;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.unip.ciberpizza.model.Cliente;
 import br.unip.ciberpizza.model.Pedido;
 import br.unip.ciberpizza.repository.PedidoRepository;
 
@@ -26,11 +26,15 @@ public class PedidoService {
         return pedidoRepository.findAll();
     }
 
-    public Pedido encontrarPedidoPorNumero(String numero) {
+    public Pedido encontrarPedidoPorNumero(Integer numero) {
         return pedidoRepository.findById(numero).orElse(null);
     }
 
-    public Pedido atualizarPedido(String numero, Pedido pedidoAtualizado) {
+    public List<Pedido> encontrarPedidosPorCliente(Cliente cliente) {
+        return pedidoRepository.findByCliente(cliente);
+    }
+
+    public Pedido atualizarPedido(Integer numero, Pedido pedidoAtualizado) {
         Pedido pedidoExistente = pedidoRepository.findById(numero).orElse(null);
 
         if (pedidoExistente != null) {
@@ -46,7 +50,7 @@ public class PedidoService {
         }
     }
 
-    public void deletarPedido(String numero) {
+    public void deletarPedido(Integer numero) {
         pedidoRepository.deleteById(numero);
     }
 }
