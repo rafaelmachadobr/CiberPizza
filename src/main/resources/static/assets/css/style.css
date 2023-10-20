@@ -60,6 +60,15 @@ img {
   border-color: #9b0000;
 }
 
+.btn-green {
+  background-color: #005f32;
+}
+
+.btn-green:hover {
+  color: #005f32;
+  border-color: #005f32;
+}
+
 header {
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }

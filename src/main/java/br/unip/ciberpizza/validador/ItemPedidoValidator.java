@@ -22,7 +22,7 @@ public class ItemPedidoValidator implements Validator {
         } else
 
         if (itemPedido.quantidade() <= 0) {
-            errors.rejectValue("quantidade", "quantidade.invalida");
+            errors.rejectValue("quantidade", "quantidade.invalido");
         }
     }
 

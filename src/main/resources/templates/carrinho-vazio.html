@@ -60,7 +60,7 @@
       </div>
       <nav class="navbar navbar-expand-lg pb-2 pt-0">
         <div class="container">
-          <a class="navbar-brand" href="/">
+          <a class="navbar-brand" th:href="@{'/?idCliente=' + ${idCliente}}">
             <h2 class="red-text">Ciber<span class="green-text">Pizza</span></h2>
           </a>
           <button
@@ -77,16 +77,31 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
               <li class="nav-item">
-                <a class="nav-link" href="/">Início</a>
+                <a class="nav-link" th:href="@{'/?idCliente=' + ${idCliente}}"
+                  >Início</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  th:href="@{'/#sobre?idCliente=' + ${idCliente}}"
+                  >Sobre</a
+                >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/#sobre">Sobre</a>
+                <a
+                  class="nav-link"
+                  th:href="@{'/#cardapio?idCliente=' + ${idCliente}}"
+                  >Cardápio
+                </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/#cardapio">Cardápio </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/#avaliacoes">Avaliações</a>
+                <a
+                  class="nav-link"
+                  th:href="@{'/#avaliacoes?idCliente=' + ${idCliente}}"
+                  >Avaliações</a
+                >
               </li>
               <li class="nav-item dropdown">
                 <a
@@ -139,196 +154,6 @@
         </div>
       </nav>
     </header>
-
-    <div class="container py-5">
-      <section class="container py-5 h-100">
-        <div class="row d-flex align-items-center justify-content-center h-100">
-          <form
-            class="card p-5 col-12 col-md-8 col-lg-6 shadow-sm bg-light"
-            action="/cadastro"
-            method="POST"
-            novalidate
-            th:object="${cadastroDTO}"
-          >
-            <h2 class="text-center mb-4">Cadastro</h2>
-
-            <div class="form-outline mb-4">
-              <label for="nome" class="form-label">Nome</label>
-              <input
-                type="text"
-                class="form-control"
-                id="nome"
-                th:field="*{nome}"
-                name="nome"
-                aria-describedby="nomeHelp"
-                th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid' : ''"
-                placeholder="Digite seu nome"
-                required
-              />
-              <div class="valid-feedback">Parece bom!</div>
-              <div class="invalid-feedback">
-                <span
-                  th:if="${#fields.hasErrors('nome')}"
-                  th:errors="*{nome}"
-                ></span>
-              </div>
-            </div>
-
-            <div class="form-outline mb-4">
-              <label for="email" class="form-label">Email</label>
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                th:field="*{email}"
-                name="email"
-                aria-describedby="emailHelp"
-                th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : ''"
-                placeholder="Digite seu email"
-                required
-              />
-              <div class="valid-feedback">Parece bom!</div>
-              <div class="invalid-feedback">
-                <span
-                  th:if="${#fields.hasErrors('email')}"
-                  th:errors="*{email}"
-                ></span>
-              </div>
-            </div>
-
-            <div class="form-outline mb-4">
-              <label for="cpf" class="form-label">CPF</label>
-              <input
-                type="text"
-                class="form-control cpf"
-                th:field="*{cpf}"
-                name="cpf"
-                aria-describedby="cpfHelp"
-                th:classappend="${#fields.hasErrors('cpf')}? 'is-invalid' : ''"
-                placeholder="Digite seu CPF"
-                required
-              />
-              <div class="valid-feedback">Parece bom!</div>
-              <div class="invalid-feedback">
-                <span
-                  th:if="${#fields.hasErrors('cpf')}"
-                  th:errors="*{cpf}"
-                ></span>
-              </div>
-            </div>
-
-            <div class="form-outline mb-4">
-              <label for="enderecoEntrega" class="form-label">Endereço</label>
-              <textarea
-                class="form-control"
-                id="enderecoEntrega"
-                th:field="*{enderecoEntrega}"
-                name="enderecoEntrega"
-                aria-describedby="enderecoEntregaHelp"
-                th:classappend="${#fields.hasErrors('enderecoEntrega')} ? 'is-invalid' : ''"
-                placeholder="Digite seu endereço"
-                required
-              ></textarea>
-              <div class="valid-feedback">Parece bom!</div>
-              <div class="invalid-feedback">
-                <span
-                  th:if="${#fields.hasErrors('enderecoEntrega')}"
-                  th:errors="*{enderecoEntrega}"
-                ></span>
-              </div>
-            </div>
-
-            <div class="form-outline mb-4">
-              <label for="telefone" class="form-label">Telefone</label>
-              <input
-                type="text"
-                class="form-control"
-                id="telefone"
-                th:field="*{telefone}"
-                name="telefone"
-                aria-describedby="telefoneHelp"
-                th:classappend="${#fields.hasErrors('telefone')} ? 'is-invalid' : ''"
-                placeholder="Digite seu telefone"
-                required
-              />
-              <div class="valid-feedback">Parece bom!</div>
-              <div class="invalid-feedback">
-                <span
-                  th:if="${#fields.hasErrors('telefone')}"
-                  th:errors="*{telefone}"
-                ></span>
-              </div>
-            </div>
-
-            <div class="form-outline mb-4">
-              <label for="senha" class="form-label">Senha</label>
-              <div class="input-group">
-                <input
-                  type="password"
-                  class="form-control"
-                  id="senha"
-                  th:field="*{senha}"
-                  name="senha"
-                  aria-describedby="senhaHelp"
-                  th:classappend="${#fields.hasErrors('senha')} ? 'is-invalid' : ''"
-                  placeholder="Digite sua senha"
-                  required
-                />
-                <button
-                  class="btn btn-outline-secondary"
-                  type="button"
-                  id="mostrarSenha"
-                >
-                  <i class="bi bi-eye-slash"></i>
-                </button>
-              </div>
-              <small id="senhaHelp" class="form-text text-muted"
-                >A senha deve ter pelo menos 8 caracteres</small
-              >
-            </div>
-
-            <div class="form-outline mb-4">
-              <label for="confirmarSenha" class="form-label"
-                >Confirmar Senha</label
-              >
-              <div class="input-group">
-                <input
-                  type="password"
-                  class="form-control"
-                  id="confirmarSenha"
-                  th:field="*{confirmarSenha}"
-                  name="confirmarSenha"
-                  aria-describedby="confirmarSenhaHelp"
-                  th:classappend="${#fields.hasErrors('confirmarSenha')} ? 'is-invalid' : ''"
-                  placeholder="Confirme sua senha"
-                  required
-                />
-                <button
-                  class="btn btn-outline-secondary"
-                  type="button"
-                  id="mostrarConfirmarSenha"
-                >
-                  <i class="bi bi-eye-slash"></i>
-                </button>
-              </div>
-              <small id="confirmarSenhaHelp" class="form-text text-muted"
-                >A senha deve ter pelo menos 8 caracteres</small
-              >
-            </div>
-
-            <div th:if="${param.error}">
-              <p class="alert alert-danger">As senhas não conferem!</p>
-            </div>
-
-            <button type="submit" class="btn w-100">Entrar</button>
-
-            <p class="text-center text-muted mt-4 mb-0">
-              Já tem uma conta? <a href="/login">Entrar</a>
-            </p>
-          </form>
-        </div>
-      </section>
-    </div>
 
     <footer id="footer" class="footer">
       <div class="container">

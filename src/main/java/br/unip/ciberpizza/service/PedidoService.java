@@ -53,4 +53,9 @@ public class PedidoService {
     public void deletarPedido(Integer numero) {
         pedidoRepository.deleteById(numero);
     }
+
+    public void deletarItensDoPedido(Pedido pedido) {
+        pedidoRepository.deleteItemsByPedido(pedido);
+    }
+
 }

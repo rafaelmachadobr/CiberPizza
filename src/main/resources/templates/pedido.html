@@ -155,75 +155,139 @@
       </nav>
     </header>
 
-    <div class="container py-5">
-      <div class="jumbotron">
-        <h1>Faça seu pedido</h1>
-        <h2>Pedido Nº <span th:text="${numeroPedido}">0000</span></h2>
-        <p>
-          Selecione as pizzas e as bebidas abaixo para adicioná-las ao seu
-          pedido!
-        </p>
-      </div>
-      <div class="row">
-        <div class="col-md-8 col-md-push-4">
-          <div class="panel panel-default rounded" id="pizza-selector">
-            <div class="panel-body">
-              <div
-                class="row row-cols-1 row-cols-md-3 my-2 align-items-center justify-content-center gy-4"
-              >
-                <div th:each="produto : ${listaProdutos}">
-                  <div class="col">
-                    <div class="card h-100">
-                      <img
-                        th:src="${produto.urlImagem}"
-                        class="card-img-top"
-                        alt="Imagem da Pizza"
-                      />
-                      <div class="card-body py-2" style="min-height: 150px">
-                        <h5 class="card-title" th:text="${produto.nome}">
-                          Nome da Pizza
-                        </h5>
-                        <p class="card-text" th:text="${produto.descricao}">
-                          Descrição da Pizza
-                        </p>
+    <div class="m-5">
+      <div class="card">
+        <div class="card-header">
+          <h1>Faça seu pedido</h1>
+          <h2>Pedido Nº <span th:text="${numeroPedido}">0000</span></h2>
+          <p>
+            Selecione as pizzas e as bebidas abaixo para adicioná-las ao seu
+            pedido!
+          </p>
+        </div>
+        <div class="row p-3">
+          <div class="col-md-8 col-md-push-4">
+            <div id="pizza-selector">
+              <div class="panel-body">
+                <div
+                  class="row row-cols-1 row-cols-md-3 align-items-center justify-content-center gy-4"
+                >
+                  <div th:each="produto : ${listaProdutos}">
+                    <div class="col">
+                      <div class="card h-100">
+                        <img
+                          th:src="${produto.urlImagem}"
+                          class="card-img-top"
+                          alt="Imagem da Pizza"
+                        />
+                        <div
+                          class="card-body py-2"
+                          style="min-height: 150px; min-width: 200px"
+                        >
+                          <h5 class="card-title" th:text="${produto.nome}">
+                            Nome da Pizza
+                          </h5>
+                          <p class="card-text" th:text="${produto.descricao}">
+                            Descrição da Pizza
+                          </p>
+                        </div>
+                        <button
+                          type="button"
+                          class="btn"
+                          data-bs-toggle="modal"
+                          th:data-bs-target="'#pizzaModal' + ${produto.id}"
+                          data-id="${produto.id}"
+                        >
+                          Ver Detalhes
+                        </button>
                       </div>
-                      <button
-                        type="button"
-                        class="btn"
-                        data-bs-toggle="modal"
-                        th:data-bs-target="'#pizzaModal' + ${produto.id}"
-                        data-id="${produto.id}"
-                      >
-                        Ver Detalhes
-                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="col-md-4 col-md-pull-8 my-2">
-          <div class="panel panel-default rounded">
-            <div class="panel-body">
-              <p>Itens do Pedido:</p>
-              <ul class="list-group">
-                <li th:each="item : ${listaPedidos}" class="list-group-item">
-                  <div class="item-details">
-                    <h4 th:text="${item.produto.nome}"></h4>
-                    <p>Tamanho: <span th:text="${item.tamanho}"></span></p>
-                    <p>
-                      Quantidade: <span th:text="${item.quantidade}"></span>
-                    </p>
-                    <p>
-                      Preço Unitário: R$
-                      <span th:text="${item.preco / item.quantidade}"></span>
-                    </p>
-                    <p>Total: R$ <span th:text="${item.preco}"></span></p>
+          <div class="col-md-4 col-md-pull-8">
+            <div class="card shadow">
+              <div class="card-header">
+                <h3>Itens do Pedido</h3>
+              </div>
+              <div class="panel-body">
+                <ul class="list-group">
+                  <li th:each="item : ${listaPedidos}" class="list-group-item">
+                    <div class="item-details card">
+                      <h4
+                        class="card-header"
+                        th:text="${item.produto.nome}"
+                      ></h4>
+                      <div class="table-responsive px-2">
+                        <table
+                          class="table mt-4 text-center table-hover table-bordered align-middle"
+                        >
+                          <thead>
+                            <tr class="table-primary">
+                              <th>Qtd.</th>
+                              <th>Preço Unit.</th>
+                              <th>Total</th>
+                              <th>Remover</th>
+                            </tr>
+                          </thead>
+                          <tbody class="table-group-divider">
+                            <tr>
+                              <td th:text="${item.quantidade}"></td>
+                              <td
+                                th:text="'R$ ' + ${#numbers.formatDecimal(item.preco / item.quantidade, 1, 'POINT', 2, 'COMMA')}"
+                              ></td>
+                              <td
+                                th:text="'R$ ' + ${#numbers.formatDecimal(item.preco, 1, 'POINT', 2, 'COMMA')}"
+                              ></td>
+                              <td>
+                                <a
+                                  class="btn btn-danger p-1"
+                                  th:href="@{'/pedido/removerItem/' + ${item.id} + '?idCliente=' + ${idCliente}}"
+                                >
+                                  <i class="bi bi-x"></i>
+                                </a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </li>
+                  <div class="align-middle text-center my-4">
+                    <a
+                      class="btn btn-lg btn-block"
+                      th:href="@{'/pedido/limparPedido/' + ${numeroPedido} + '?idCliente=' + ${idCliente}}"
+                    >
+                      Limpar Pedido <i class="fas fa-trash"></i>
+                    </a>
                   </div>
-                </li>
-              </ul>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card mt-3 shadow">
+              <div class="card-header text-center">
+                <div class="p-3">
+                  Valor total:
+                  <span
+                    class="badge bg-success fs-5"
+                    th:text="'R$ ' + ${#numbers.formatDecimal(valorTotal, 1, 'POINT', 2, 'COMMA')}"
+                  ></span>
+                </div>
+              </div>
+              <div class="card-footer bg-transparent">
+                <div class="align-middle text-center p-3">
+                  <a
+                    class="btn btn-green btn-lg btn-block"
+                    th:href="@{'/carrinho?idCliente=' + ${idCliente}}"
+                  >
+                    Ir para o carrinho <i class="fas fa-shopping-cart"></i>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -341,8 +405,9 @@
               </div>
               <div class="col">
                 <p th:text="${produto.descricao}"></p>
-                <p>Valor: R$ <span th:text="${produto.valor}">0.00</span></p>
-
+                <p
+                  th:text="'Valor: R$ ' + ${#numbers.formatDecimal(produto.valor, 1, 'POINT', 2, 'COMMA')}"
+                ></p>
                 <div class="form-outline mb-4">
                   <label for="quantidade" class="form-label">Tamanho</label>
                   <select
@@ -388,8 +453,8 @@
             >
               Cancelar
             </button>
-            <button type="submit" class="btn btn-primary">
-              Adicionar ao Pedido
+            <button type="submit" class="btn btn-green">
+              Adicionar ao Pedido <i class="fas fa-shopping-cart"></i>
             </button>
           </div>
         </form>

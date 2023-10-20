@@ -5,78 +5,78 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import br.unip.ciberpizza.dto.RegisterDTO;
+import br.unip.ciberpizza.dto.CadastroDTO;
 import br.unip.ciberpizza.service.ClienteService;
 
 @Component
-public class RegisterClienteValidator implements Validator {
+public class CadastroClienteValidator implements Validator {
     @Autowired
     private final ClienteService clienteService;
 
-    public RegisterClienteValidator(ClienteService clienteService) {
+    public CadastroClienteValidator(ClienteService clienteService) {
         this.clienteService = clienteService;
     }
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return RegisterDTO.class.equals(clazz);
+        return CadastroDTO.class.equals(clazz);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
-        RegisterDTO register = (RegisterDTO) target;
+        CadastroDTO cadastro = (CadastroDTO) target;
 
-        if (register.nome().isEmpty()) {
+        if (cadastro.nome().isEmpty()) {
             errors.rejectValue("nome", "nome.vazio");
         }
-        if (register.email().isEmpty()) {
+        if (cadastro.email().isEmpty()) {
             errors.rejectValue("email", "email.vazio");
         }
-        if (register.cpf().isEmpty()) {
+        if (cadastro.cpf().isEmpty()) {
             errors.rejectValue("cpf", "cpf.vazio");
         }
-        if (register.enderecoEntrega().isEmpty()) {
+        if (cadastro.enderecoEntrega().isEmpty()) {
             errors.rejectValue("enderecoEntrega", "enderecoEntrega.vazio");
         }
-        if (register.telefone().isEmpty()) {
+        if (cadastro.telefone().isEmpty()) {
             errors.rejectValue("telefone", "telefone.vazio");
         }
-        if (register.senha().isEmpty()) {
+        if (cadastro.senha().isEmpty()) {
             errors.rejectValue("senha", "senha.vazio");
         }
-        if (register.confirmarSenha().isEmpty()) {
+        if (cadastro.confirmarSenha().isEmpty()) {
             errors.rejectValue("confirmarSenha", "confirmarSenha.vazio");
         }
 
-        if (!isEmailValido(register.email())) {
+        if (!isEmailValido(cadastro.email())) {
             errors.rejectValue("email", "email.invalido");
         }
 
-        if (!isCpfValido(register.cpf())) {
+        if (!isCpfValido(cadastro.cpf())) {
             errors.rejectValue("cpf", "cpf.invalido");
         }
 
-        if (!isTelefoneValido(register.telefone())) {
+        if (!isTelefoneValido(cadastro.telefone())) {
             errors.rejectValue("telefone", "telefone.invalido");
         }
 
-        if (isCpfJaCadastrado(register.cpf())) {
+        if (isCpfJaCadastrado(cadastro.cpf())) {
             errors.rejectValue("cpf", "cpf.jaCadastrado");
         }
 
-        if (isEmailJaCadastrado(register.email())) {
+        if (isEmailJaCadastrado(cadastro.email())) {
             errors.rejectValue("email", "email.jaCadastrado");
         }
 
-        if (isTelefoneJaCadastrado(register.telefone())) {
+        if (isTelefoneJaCadastrado(cadastro.telefone())) {
             errors.rejectValue("telefone", "telefone.jaCadastrado");
         }
 
-        if (!isSenhaValida(register.senha())) {
+        if (!isSenhaValida(cadastro.senha())) {
             errors.rejectValue("senha", "senha.invalida");
         }
 
-        if (!isSenhaValida(register.confirmarSenha())) {
+        if (!isSenhaValida(cadastro.confirmarSenha())) {
             errors.rejectValue("confirmarSenha", "confirmarSenha.invalida");
         }
     }

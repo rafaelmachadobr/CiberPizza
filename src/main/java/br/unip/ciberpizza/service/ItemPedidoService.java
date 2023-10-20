@@ -52,4 +52,14 @@ public class ItemPedidoService {
     public void deletarItemPedido(String id) {
         itemPedidoRepository.deleteById(id);
     }
+
+    public double calcularValorTotal(List<ItemPedido> itensPedido) {
+        double valorTotal = 0;
+
+        for (ItemPedido itemPedido : itensPedido) {
+            valorTotal += itemPedido.getQuantidade() * itemPedido.getProduto().getValor();
+        }
+
+        return valorTotal;
+    }
 }
