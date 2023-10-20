@@ -63,26 +63,43 @@ public class PedidoController {
             List<Pedido> pedidos = pedidoService.encontrarPedidosPorCliente(cliente);
 
             if (cliente != null) {
-                if (pedidoService.encontrarPedidosPorCliente(cliente).isEmpty()) {
-                    return new ModelAndView("redirect:/pedido/criar?idCliente=" + idCliente);
-                } else {
-                    ModelAndView modelAndView = new ModelAndView("pedido");
-                    modelAndView.addObject("itemPedidoDTO", new ItemPedidoDTO(1, null));
-                    modelAndView.addObject("listaProdutos", produtoService.listarProdutos());
-                    modelAndView.addObject("listaPedidos",
-                            itemPedidoService.encontrarItensPedidoPorPedido(pedidos.get(pedidos.size() - 1)));
-                    modelAndView.addObject("idCliente", idCliente);
+                if (!pedidos.isEmpty()) {
+                    Pedido ultimoPedido = pedidos.get(pedidos.size() - 1);
 
-                    double valorTotal = itemPedidoService.calcularValorTotal(
-                            itemPedidoService.encontrarItensPedidoPorPedido(pedidos.get(pedidos.size() - 1)));
-                    modelAndView.addObject("valorTotal", valorTotal);
+                    if (ultimoPedido.getStatus() == StatusPedido.PAGAMENTO_CONFIRMADO
+                            || ultimoPedido.getStatus() == StatusPedido.CANCELADO) {
+                        Pedido novoPedido = new Pedido();
+                        novoPedido.setCliente(cliente);
+                        novoPedido.setStatus(StatusPedido.REALIZACAO_PEDIDO);
+                        novoPedido.setMomento(Date.from(new Date().toInstant()));
+                        pedidoService.salvarPedido(novoPedido);
 
-                    if (!pedidos.isEmpty()) {
-                        Integer numeroPedido = pedidos.get(pedidos.size() - 1).getNumero();
+                        return new ModelAndView("redirect:/pedido?idCliente=" + idCliente);
+                    } else {
+                        ModelAndView modelAndView = new ModelAndView("pedido");
+                        modelAndView.addObject("itemPedidoDTO", new ItemPedidoDTO(1, null));
+                        modelAndView.addObject("listaProdutos", produtoService.listarProdutos());
+                        modelAndView.addObject("listaPedidos",
+                                itemPedidoService.encontrarItensPedidoPorPedido(ultimoPedido));
+                        modelAndView.addObject("idCliente", idCliente);
+
+                        double valorTotal = itemPedidoService
+                                .calcularValorTotal(itemPedidoService.encontrarItensPedidoPorPedido(ultimoPedido));
+                        modelAndView.addObject("valorTotal", valorTotal);
+
+                        Integer numeroPedido = ultimoPedido.getNumero();
                         modelAndView.addObject("numeroPedido", numeroPedido);
-                    }
 
-                    return modelAndView;
+                        return modelAndView;
+                    }
+                } else {
+                    Pedido pedido = new Pedido();
+                    pedido.setCliente(cliente);
+                    pedido.setStatus(StatusPedido.REALIZACAO_PEDIDO);
+                    pedido.setMomento(Date.from(new Date().toInstant()));
+                    pedidoService.salvarPedido(pedido);
+
+                    return new ModelAndView("redirect:/pedido?idCliente=" + idCliente);
                 }
             }
         }

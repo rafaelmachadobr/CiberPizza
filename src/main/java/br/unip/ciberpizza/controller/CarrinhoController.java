@@ -14,6 +14,7 @@ import br.unip.ciberpizza.dto.PedidoDTO;
 import br.unip.ciberpizza.model.Cliente;
 import br.unip.ciberpizza.model.ItemPedido;
 import br.unip.ciberpizza.model.Pedido;
+import br.unip.ciberpizza.model.StatusPedido;
 import br.unip.ciberpizza.service.ClienteService;
 import br.unip.ciberpizza.service.ItemPedidoService;
 import br.unip.ciberpizza.service.PedidoService;
@@ -48,6 +49,14 @@ public class CarrinhoController {
 
                 if (!pedidos.isEmpty()) {
                     Pedido ultimoPedido = pedidoService.encontrarUltimoPedido(cliente);
+
+                    if (ultimoPedido.getStatus() == StatusPedido.PAGAMENTO_CONFIRMADO
+                            || ultimoPedido.getStatus() == StatusPedido.CANCELADO) {
+                        modelAndView = new ModelAndView("carrinho-vazio");
+                        modelAndView.addObject("idCliente", idCliente);
+                        return modelAndView;
+                    }
+
                     List<ItemPedido> itensPedido = itemPedidoService.encontrarItensPedidoPorPedido(ultimoPedido);
 
                     if (!itensPedido.isEmpty()) {
