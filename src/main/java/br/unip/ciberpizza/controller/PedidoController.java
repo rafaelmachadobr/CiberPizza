@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,6 +71,10 @@ public class PedidoController {
                     modelAndView.addObject("listaPedidos",
                             itemPedidoService.encontrarItensPedidoPorPedido(pedidos.get(pedidos.size() - 1)));
                     modelAndView.addObject("idCliente", idCliente);
+
+                    double valorTotal = itemPedidoService.calcularValorTotal(
+                            itemPedidoService.encontrarItensPedidoPorPedido(pedidos.get(pedidos.size() - 1)));
+                    modelAndView.addObject("valorTotal", valorTotal);
 
                     if (!pedidos.isEmpty()) {
                         Integer numeroPedido = pedidos.get(pedidos.size() - 1).getNumero();
@@ -150,4 +155,27 @@ public class PedidoController {
         return "redirect:/pedido?idCliente=" + pedido.getCliente().getId();
     }
 
+    @GetMapping("/removerItem/{idItemPedido}")
+    public String removerItemPedido(@PathVariable String idItemPedido,
+            @RequestParam(name = "idCliente", required = false) String idCliente) {
+        ItemPedido itemPedido = itemPedidoService.encontrarItemPedidoPorId(idItemPedido);
+
+        if (itemPedido != null) {
+            itemPedidoService.deletarItemPedido(idItemPedido);
+        }
+
+        return "redirect:/pedido?idCliente=" + idCliente;
+    }
+
+    @GetMapping("/limparPedido/{numeroPedido}")
+    public String limparPedido(@RequestParam(name = "idCliente", required = false) String idCliente,
+            @PathVariable String numeroPedido) {
+        Pedido pedido = pedidoService.encontrarPedidoPorNumero(Integer.parseInt(numeroPedido));
+
+        if (pedido != null) {
+            pedidoService.deletarItensDoPedido(pedido);
+        }
+
+        return "redirect:/pedido?idCliente=" + idCliente;
+    }
 }

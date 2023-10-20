@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.unip.ciberpizza.dto.RegisterDTO;
+import br.unip.ciberpizza.dto.CadastroDTO;
 import br.unip.ciberpizza.model.Cliente;
 import br.unip.ciberpizza.service.ClienteService;
-import br.unip.ciberpizza.validador.RegisterClienteValidator;
+import br.unip.ciberpizza.validador.CadastroClienteValidator;
 import jakarta.validation.Valid;
 
 @Controller
@@ -23,17 +23,17 @@ public class CadastroController {
     private final ClienteService clienteService;
 
     @Autowired
-    private final RegisterClienteValidator clienteValidador;
+    private final CadastroClienteValidator clienteValidador;
 
-    public CadastroController(ClienteService clienteService, RegisterClienteValidator clienteValidador) {
+    public CadastroController(ClienteService clienteService, CadastroClienteValidator clienteValidador) {
         this.clienteService = clienteService;
         this.clienteValidador = clienteValidador;
     }
 
     @GetMapping
-    public ModelAndView register(@RequestParam(name = "idCliente", required = false) String idCliente) {
+    public ModelAndView cadastro(@RequestParam(name = "idCliente", required = false) String idCliente) {
         ModelAndView modelAndView = new ModelAndView("cadastro");
-        modelAndView.addObject("registerDTO", new RegisterDTO(null, null, null, null, null, null, null));
+        modelAndView.addObject("cadastroDTO", new CadastroDTO(null, null, null, null, null, null, null));
 
         if (idCliente != null) {
             Cliente cliente = clienteService.encontrarClientePorId(idCliente);
@@ -47,19 +47,20 @@ public class CadastroController {
     }
 
     @PostMapping
-    public String cadastrarCliente(@Valid @ModelAttribute RegisterDTO registerDTO, Errors errors) {
-        clienteValidador.validate(registerDTO, errors);
+    public String cadastrarCliente(@Valid @ModelAttribute CadastroDTO cadastroDTO, Errors errors) {
+        clienteValidador.validate(cadastroDTO, errors);
+
 
         if (errors.hasErrors()) {
             return "cadastro";
         }
 
-        if (!registerDTO.senha().equals(registerDTO.confirmarSenha())) {
+        if (!cadastroDTO.senha().equals(cadastroDTO.confirmarSenha())) {
             return "redirect:/cadastro?error=true";
         }
 
-        Cliente cliente = new Cliente(registerDTO.nome(), registerDTO.email(), registerDTO.cpf(),
-                registerDTO.enderecoEntrega(), registerDTO.telefone(), registerDTO.senha());
+        Cliente cliente = new Cliente(cadastroDTO.nome(), cadastroDTO.email(), cadastroDTO.cpf(),
+                cadastroDTO.enderecoEntrega(), cadastroDTO.telefone(), cadastroDTO.senha());
 
         clienteService.salvarCliente(cliente);
 
