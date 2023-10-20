@@ -43,9 +43,8 @@ public class HomeController {
     }
 
     @PostMapping("/contato")
-    public String salvarContato(@ModelAttribute Contato contato) {
+    public String salvarContato(@ModelAttribute Contato contato, @RequestParam("idCliente") String idCliente) {
         contatoService.salvarContato(contato);
-
-        return "redirect:/";
+        return "redirect:/?idCliente=" + idCliente;
     }
 }

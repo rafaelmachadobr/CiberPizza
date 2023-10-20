@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.unip.ciberpizza.dto.ItemPedidoDTO;
+import br.unip.ciberpizza.dto.PedidoDTO;
 import br.unip.ciberpizza.model.Cliente;
 import br.unip.ciberpizza.model.ItemPedido;
 import br.unip.ciberpizza.model.Pedido;
@@ -98,7 +99,7 @@ public class PedidoController {
                 if (pedidoService.encontrarPedidosPorCliente(cliente).isEmpty()) {
                     Pedido pedido = new Pedido();
                     pedido.setCliente(cliente);
-                    pedido.setStatus(StatusPedido.ARGUARDANDO_PEDIDO);
+                    pedido.setStatus(StatusPedido.REALIZACAO_PEDIDO);
                     pedido.setMomento(Date.from(new Date().toInstant()));
                     pedidoService.salvarPedido(pedido);
 
@@ -177,5 +178,20 @@ public class PedidoController {
         }
 
         return "redirect:/pedido?idCliente=" + idCliente;
+    }
+
+    @PostMapping("/finalizarPedido/{numeroPedido}")
+    public String finalizarPedido(@RequestParam(name = "idCliente", required = false) String idCliente,
+            @PathVariable String numeroPedido, @ModelAttribute PedidoDTO pedidoDTO) {
+        Pedido pedido = pedidoService.encontrarPedidoPorNumero(Integer.parseInt(numeroPedido));
+
+        if (pedido != null) {
+            pedido.setStatus(StatusPedido.PAGAMENTO_CONFIRMADO);
+            pedido.setPagamento(pedidoDTO.formaPagamento());
+            pedidoService.salvarPedido(pedido);
+        }
+
+        System.out.println(idCliente);
+        return "redirect:/?idCliente=" + idCliente;
     }
 }
