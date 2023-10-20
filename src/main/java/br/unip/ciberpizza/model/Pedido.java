@@ -30,19 +30,18 @@ public class Pedido {
     private Date momento;
 
     @Column(nullable = false)
-    @NotNull(message = "O valor não pode ser nulo")
     @Min(value = 0, message = "O valor deve ser maior ou igual a zero")
     private Double valor = 0.0;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    @NotNull(message = "O status não pode ser nulo, deve ser um dos seguintes: ARGUARDANDO_PEDIDO, AGUARDANDO_PAGAMENTO, PAGAMENTO_CONFIRMADO, EM_ANDAMENTO, ENVIADO, ENTREGUE, CANCELADO")
-    private StatusPedido status = StatusPedido.ARGUARDANDO_PEDIDO;
+    @NotNull(message = "O status não pode ser nulo, deve ser um dos seguintes: REALIZACAO_PEDIDO, PAGAMENTO_CONFIRMADO, CANCELADO")
+    private StatusPedido status = StatusPedido.REALIZACAO_PEDIDO;
 
     @Column(nullable = false)
     @NotNull(message = "O tipo de pagamento não pode ser nulo, deve ser um dos seguintes: DINHEIRO, CARTAO_CREDITO, CARTAO_DEBITO, VALE_ALIMENTACAO, VALE_REFEICAO, PIX")
     @Enumerated(EnumType.STRING)
-    private Pagamento pagamento = Pagamento.DINHEIRO;
+    private FormaPagamento pagamento = FormaPagamento.DINHEIRO;
 
     @ManyToOne
     private Cliente cliente;

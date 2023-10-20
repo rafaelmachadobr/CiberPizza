@@ -60,4 +60,7 @@ public class PedidoService {
         pedidoRepository.deleteItemsByPedido(pedido);
     }
 
+    public Pedido encontrarUltimoPedido(Cliente cliente) {
+        return pedidoRepository.findFirstByClienteOrderByNumeroDesc(cliente);
+    }
 }

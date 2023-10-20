@@ -53,7 +53,7 @@ public class ItemPedidoService {
         itemPedidoRepository.deleteById(id);
     }
 
-    public double calcularValorTotal(List<ItemPedido> itensPedido) {
+    public Double calcularValorTotal(List<ItemPedido> itensPedido) {
         double valorTotal = 0;
 
         for (ItemPedido itemPedido : itensPedido) {
