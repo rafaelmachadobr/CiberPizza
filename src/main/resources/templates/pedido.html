@@ -207,51 +207,23 @@
         <div class="col-md-4 col-md-pull-8 my-2">
           <div class="panel panel-default rounded">
             <div class="panel-body">
-              <p>Option for pickup or delivery and a place for information.</p>
-
-              <form role="form" method="post" action="orders.html">
-                <div class="radio">
-                  <label>
-                    <input
-                      type="radio"
-                      name="method"
-                      id="method_pickup"
-                      value="pickup"
-                      checked
-                    />
-                    Pickup
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input
-                      type="radio"
-                      name="method"
-                      id="method_delivery"
-                      value="delivery"
-                    />
-                    Delivery <kbd class="price">$0.00</kbd>
-                  </label>
-                </div>
-
-                <div class="form-group">
-                  <label class="sr-only" for="name">Customer Name</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="name"
-                    name="name"
-                    placeholder="Customer Name"
-                    required
-                  />
-                </div>
-
-                <table class="table" id="order"></table>
-
-                <button type="submit" class="btn btn-default btn-lg">
-                  Place Order <i class="glyphicon glyphicon-chevron-right"></i>
-                </button>
-              </form>
+              <p>Itens do Pedido:</p>
+              <ul class="list-group">
+                <li th:each="item : ${listaPedidos}" class="list-group-item">
+                  <div class="item-details">
+                    <h4 th:text="${item.produto.nome}"></h4>
+                    <p>Tamanho: <span th:text="${item.tamanho}"></span></p>
+                    <p>
+                      Quantidade: <span th:text="${item.quantidade}"></span>
+                    </p>
+                    <p>
+                      Preço Unitário: R$
+                      <span th:text="${item.preco / item.quantidade}"></span>
+                    </p>
+                    <p>Total: R$ <span th:text="${item.preco}"></span></p>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -369,7 +341,7 @@
               </div>
               <div class="col">
                 <p th:text="${produto.descricao}"></p>
-                <p th:text="${produto.valor}"></p>
+                <p>Valor: R$ <span th:text="${produto.valor}">0.00</span></p>
 
                 <div class="form-outline mb-4">
                   <label for="quantidade" class="form-label">Tamanho</label>

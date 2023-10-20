@@ -1,5 +1,6 @@
 package br.unip.ciberpizza.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import br.unip.ciberpizza.model.Cliente;
 import br.unip.ciberpizza.model.ItemPedido;
 import br.unip.ciberpizza.model.Pedido;
 import br.unip.ciberpizza.model.Produto;
+import br.unip.ciberpizza.model.StatusPedido;
 import br.unip.ciberpizza.model.Tamanho;
 import br.unip.ciberpizza.model.Tipo;
 import br.unip.ciberpizza.service.ClienteService;
@@ -65,6 +67,8 @@ public class PedidoController {
                     ModelAndView modelAndView = new ModelAndView("pedido");
                     modelAndView.addObject("itemPedidoDTO", new ItemPedidoDTO(1, null));
                     modelAndView.addObject("listaProdutos", produtoService.listarProdutos());
+                    modelAndView.addObject("listaPedidos",
+                            itemPedidoService.encontrarItensPedidoPorPedido(pedidos.get(pedidos.size() - 1)));
                     modelAndView.addObject("idCliente", idCliente);
 
                     if (!pedidos.isEmpty()) {
@@ -89,6 +93,8 @@ public class PedidoController {
                 if (pedidoService.encontrarPedidosPorCliente(cliente).isEmpty()) {
                     Pedido pedido = new Pedido();
                     pedido.setCliente(cliente);
+                    pedido.setStatus(StatusPedido.ARGUARDANDO_PEDIDO);
+                    pedido.setMomento(Date.from(new Date().toInstant()));
                     pedidoService.salvarPedido(pedido);
 
                     return new ModelAndView(

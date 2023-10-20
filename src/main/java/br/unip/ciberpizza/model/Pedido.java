@@ -37,7 +37,7 @@ public class Pedido {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     @NotNull(message = "O status não pode ser nulo, deve ser um dos seguintes: ARGUARDANDO_PEDIDO, AGUARDANDO_PAGAMENTO, PAGAMENTO_CONFIRMADO, EM_ANDAMENTO, ENVIADO, ENTREGUE, CANCELADO")
-    private Status status = Status.ARGUARDANDO_PEDIDO;
+    private StatusPedido status = StatusPedido.ARGUARDANDO_PEDIDO;
 
     @Column(nullable = false)
     @NotNull(message = "O tipo de pagamento não pode ser nulo, deve ser um dos seguintes: DINHEIRO, CARTAO_CREDITO, CARTAO_DEBITO, VALE_ALIMENTACAO, VALE_REFEICAO, PIX")

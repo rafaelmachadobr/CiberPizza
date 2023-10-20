@@ -1,6 +1,6 @@
 package br.unip.ciberpizza.model;
 
-public enum Status {
+public enum StatusPedido {
     ARGUARDANDO_PEDIDO,
     AGUARDANDO_PAGAMENTO,
     PAGAMENTO_CONFIRMADO,
