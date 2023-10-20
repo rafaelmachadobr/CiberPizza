@@ -15,4 +15,6 @@ public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
     @Modifying
     @Query("DELETE FROM ItemPedido ip WHERE ip.pedido = :pedido")
     void deleteItemsByPedido(Pedido pedido);
+
+    Pedido findFirstByClienteOrderByNumeroDesc(Cliente cliente);
 }

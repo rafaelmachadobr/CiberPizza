@@ -155,6 +155,250 @@
       </nav>
     </header>
 
+    <main class="h-100 h-custom bg-light-gray">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col">
+            <div class="card">
+              <div class="card-body p-4">
+                <div class="row">
+                  <div class="col-lg-7">
+                    <h5 class="mb-3">
+                      <a
+                        th:href="@{'/pedido?idCliente=' + ${idCliente}}"
+                        class="text-body"
+                        ><i class="fas fa-long-arrow-alt-left me-2"></i>Voltar
+                        ao pedido
+                      </a>
+                    </h5>
+                    <hr />
+
+                    <div
+                      class="d-flex justify-content-between align-items-center mb-4"
+                    >
+                      <div>
+                        <p class="mb-1">
+                          Aqui está onde a mágica acontece. Seu carrinho é o
+                          lugar onde suas escolhas ganham vida, onde o sabor se
+                          transforma em realidade. Tudo que você adorou em nosso
+                          cardápio está agora esperando por você. Personalize
+                          seu pedido, faça ajustes, adicione ou remova, e crie a
+                          refeição perfeita para você. Quando estiver pronto,
+                          basta finalizar o pedido, e nós cuidaremos do resto.
+                          Sabor e conveniência em um só lugar - essa é a
+                          experiência CiberPizza.
+                        </p>
+                        <p class="mb-0">
+                          Você tem
+                          <span th:text="${itensPedido.size()}">0 ></span> itens
+                          no seu carrinho.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div th:each="item : ${itensPedido}" class="card mb-3">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                          <div class="d-flex flex-row align-items-center">
+                            <div>
+                              <img
+                                th:src="${item.produto.urlImagem}"
+                                class="img-fluid rounded-3"
+                                alt="Item"
+                                style="width: 65px"
+                              />
+                            </div>
+                            <div class="ms-3">
+                              <h5 th:text="${item.produto.nome}">
+                                Nome do Item
+                              </h5>
+                              <p
+                                class="small mb-0 d-inline-block text-truncate"
+                                style="max-width: 350px"
+                                th:text="${item.produto.descricao}"
+                              >
+                                Descrição do Item
+                              </p>
+                            </div>
+                          </div>
+                          <div class="d-flex flex-row align-items-center">
+                            <div style="width: 50px">
+                              <h5
+                                class="fw-normal mb-0"
+                                th:text="${item.quantidade}"
+                              >
+                                0
+                              </h5>
+                            </div>
+                            <div style="width: 100px">
+                              <h5
+                                class="mb-0"
+                                th:text="'R$ ' + ${#numbers.formatDecimal(item.produto.valor, 1, 'POINT', 2, 'COMMA')}"
+                              >
+                                $0.00
+                              </h5>
+                            </div>
+                            <div class="ms-3">
+                              <a
+                                th:href="@{'/carrinho/removerItem/' + ${item.id} + '?idCliente=' + ${idCliente}}"
+                                style="color: #cecece"
+                                ><i class="fas fa-trash-alt"></i
+                              ></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-5">
+                    <div class="card bg-red text-white rounded-3">
+                      <div class="card-body">
+                        <div
+                          class="d-flex justify-content-between align-items-center mb-4"
+                        >
+                          <h5 class="mb-0">Pagamento</h5>
+                        </div>
+
+                        <p class="small mb-2">Tipos aceitos:</p>
+                        <div
+                          class="d-flex justify-content-around mb-4 p-2 rounded-3"
+                        >
+                          <i
+                            class="fab fa-cc-visa fa-2x me-2"
+                            alt="Visa"
+                            title="Visa"
+                          ></i>
+                          <i
+                            class="fab fa-cc-mastercard fa-2x me-2"
+                            alt="Mastercard"
+                            title="Mastercard"
+                          ></i>
+                          <i
+                            class="fab fa-cc-amex fa-2x me-2"
+                            alt="Amex"
+                            title="Amex"
+                          ></i>
+                          <i
+                            class="fas fa-money-check fa-2x me-2"
+                            alt="Boleto Bancário"
+                            title="Boleto Bancário"
+                          ></i>
+                          <i
+                            class="fas fa-money-bill-alt fa-2x me-2"
+                            alt="Transferência Bancária"
+                            title="Transferência Bancária"
+                          ></i>
+                          <i
+                            class="fab fa-pix fa-2x me-2"
+                            alt="Pagamento Digital (Pix)"
+                            title="Pagamento Digital (Pix)"
+                          ></i>
+                          <i
+                            class="fab fa-cc-visa fa-2x me-2"
+                            alt="Cartão de Débito"
+                            title="Cartão de Débito"
+                          ></i>
+                          <i
+                            class="fab fa-cc-mastercard fa-2x me-2"
+                            alt="Cartão de Débito"
+                            title="Cartão de Débito"
+                          ></i>
+                          <i
+                            class="fas fa-money-bill-wave fa-2x me-2"
+                            alt="Dinheiro/Cheque"
+                            title="Dinheiro/Cheque"
+                          ></i>
+                        </div>
+
+                        <form
+                          th:action="@{'/pedido/finalizarPedido/' + ${numeroPedido} + '?idCliente=' + ${idCliente}}"
+                          method="post"
+                          novalidate
+                          th:object="${pedidoDTO}"
+                        >
+                          <label for="forma-pagamento">
+                            Forma de pagamento
+                          </label>
+                          <select
+                            id="forma-pagamento"
+                            class="form-select mb-3"
+                            aria-label="Forma de pagamento"
+                            th:field="*{formaPagamento}"
+                          >
+                            <option value="DINHEIRO" selected>Dinheiro</option>
+                            <option value="CARTAO_CREDITO">
+                              Cartão de Crédito
+                            </option>
+                            <option value="CARTAO_DEBITO">
+                              Cartão de Débito
+                            </option>
+                            <option value="PIX">Pix</option>
+                            <option value="BOLETO_BANCARIO">
+                              Boleto Bancário
+                            </option>
+                            <option value="TRANSFERENCIA_BANCARIA">
+                              Transferência Bancária
+                            </option>
+                            <option value="VALE_ALIMENTACAO">
+                              Vale Alimentação
+                            </option>
+                            <option value="VALE_REFEICAO">Vale Refeição</option>
+                          </select>
+
+                          <hr class="my-4" />
+
+                          <div class="d-flex justify-content-between">
+                            <p class="mb-2">Subtotal</p>
+                            <p
+                              class="mb-2"
+                              th:text="'R$ ' + ${#numbers.formatDecimal(valorTotal, 1, 'POINT', 2, 'COMMA')}"
+                            >
+                              Valor Total
+                            </p>
+                          </div>
+
+                          <div class="d-flex justify-content-between">
+                            <p class="mb-2">Taxa de entrega</p>
+                            <p class="mb-2">R$ 10,00</p>
+                          </div>
+
+                          <div class="d-flex justify-content-between mb-4">
+                            <p class="mb-2">Total(C/ Taxa)</p>
+                            <p
+                              class="mb-2"
+                              th:text="'R$ ' + ${#numbers.formatDecimal(valorTotal + 10, 1, 'POINT', 2, 'COMMA')}"
+                            >
+                              Valor Total (C/ Taxa)
+                            </p>
+                          </div>
+
+                          <button
+                            type="submit"
+                            class="btn btn-green btn-block btn-lg w-100"
+                          >
+                            <div class="d-flex justify-content-between">
+                              <span
+                                th:text="'R$ ' + ${#numbers.formatDecimal(valorTotal + 10, 1, 'POINT', 2, 'COMMA')}"
+                              ></span>
+                              <span
+                                >Finalizar Pedido
+                                <i class="fas fa-long-arrow-alt-right ms-2"></i
+                              ></span>
+                            </div>
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
     <footer id="footer" class="footer">
       <div class="container">
         <div class="row gy-3">

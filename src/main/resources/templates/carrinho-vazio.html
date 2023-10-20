@@ -144,7 +144,7 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#contato">Contato</a>
+                <a class="nav-link" href="/#contato">Contato</a>
               </li>
             </ul>
             <a class="btn" th:href="@{'/carrinho?idCliente=' + ${idCliente}}">
@@ -154,6 +154,19 @@
         </div>
       </nav>
     </header>
+
+    <main class="main d-flex align-items-center justify-content-center" style="height: 75vh;">
+      <div class="text-center">
+        <h1 class="display-1 fw-bold">Carrinho Vazio</h1>
+        <p class="fs-3">Parece que seu carrinho está vazio.</p>
+        <p class="lead">Não há itens no seu carrinho de compras.</p>
+        <a
+          class="btn btn-green"
+          th:href="@{'/pedido?idCliente=' + ${idCliente}}"
+          >Voltar para o Cardápio</a
+        >
+      </div>
+    </main>
 
     <footer id="footer" class="footer">
       <div class="container">
