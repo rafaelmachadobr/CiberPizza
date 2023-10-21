@@ -50,7 +50,7 @@ public class CarrinhoController {
                 if (!pedidos.isEmpty()) {
                     Pedido ultimoPedido = pedidoService.encontrarUltimoPedido(cliente);
 
-                    if (ultimoPedido.getStatus() == StatusPedido.PAGAMENTO_CONFIRMADO
+                    if (ultimoPedido.getStatus() == StatusPedido.FINALIZADO
                             || ultimoPedido.getStatus() == StatusPedido.CANCELADO) {
                         modelAndView = new ModelAndView("carrinho-vazio");
                         modelAndView.addObject("idCliente", idCliente);

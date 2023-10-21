@@ -66,11 +66,11 @@ public class PedidoController {
                 if (!pedidos.isEmpty()) {
                     Pedido ultimoPedido = pedidos.get(pedidos.size() - 1);
 
-                    if (ultimoPedido.getStatus() == StatusPedido.PAGAMENTO_CONFIRMADO
+                    if (ultimoPedido.getStatus() == StatusPedido.FINALIZADO
                             || ultimoPedido.getStatus() == StatusPedido.CANCELADO) {
                         Pedido novoPedido = new Pedido();
                         novoPedido.setCliente(cliente);
-                        novoPedido.setStatus(StatusPedido.REALIZACAO_PEDIDO);
+                        novoPedido.setStatus(StatusPedido.PENDENTE);
                         novoPedido.setMomento(Date.from(new Date().toInstant()));
                         pedidoService.salvarPedido(novoPedido);
 
@@ -85,6 +85,7 @@ public class PedidoController {
 
                         double valorTotal = itemPedidoService
                                 .calcularValorTotal(itemPedidoService.encontrarItensPedidoPorPedido(ultimoPedido));
+
                         modelAndView.addObject("valorTotal", valorTotal);
 
                         Integer numeroPedido = ultimoPedido.getNumero();
@@ -95,7 +96,7 @@ public class PedidoController {
                 } else {
                     Pedido pedido = new Pedido();
                     pedido.setCliente(cliente);
-                    pedido.setStatus(StatusPedido.REALIZACAO_PEDIDO);
+                    pedido.setStatus(StatusPedido.PENDENTE);
                     pedido.setMomento(Date.from(new Date().toInstant()));
                     pedidoService.salvarPedido(pedido);
 
@@ -116,7 +117,7 @@ public class PedidoController {
                 if (pedidoService.encontrarPedidosPorCliente(cliente).isEmpty()) {
                     Pedido pedido = new Pedido();
                     pedido.setCliente(cliente);
-                    pedido.setStatus(StatusPedido.REALIZACAO_PEDIDO);
+                    pedido.setStatus(StatusPedido.PENDENTE);
                     pedido.setMomento(Date.from(new Date().toInstant()));
                     pedidoService.salvarPedido(pedido);
 
@@ -170,6 +171,12 @@ public class PedidoController {
 
         itemPedidoService.salvarItemPedido(itemPedido);
 
+        List<ItemPedido> itensDoPedido = itemPedidoService.encontrarItensPedidoPorPedido(pedido);
+        Double valorTotal = itemPedidoService.calcularValorTotal(itensDoPedido);
+
+        pedido.setValor(valorTotal);
+        pedidoService.salvarPedido(pedido);
+
         return "redirect:/pedido?idCliente=" + pedido.getCliente().getId();
     }
 
@@ -197,18 +204,33 @@ public class PedidoController {
         return "redirect:/pedido?idCliente=" + idCliente;
     }
 
+    @GetMapping("/cancelarPedido/{numeroPedido}")
+    public String cancelarPedido(@RequestParam(name = "idCliente", required = false) String idCliente,
+            @PathVariable String numeroPedido) {
+        Pedido pedido = pedidoService.encontrarPedidoPorNumero(Integer.parseInt(numeroPedido));
+        Double valorTotal = itemPedidoService
+                .calcularValorTotal(itemPedidoService.encontrarItensPedidoPorPedido(pedido));
+
+        if (pedido != null) {
+            pedido.setValor(valorTotal + 10);
+            pedido.setStatus(StatusPedido.CANCELADO);
+            pedidoService.salvarPedido(pedido);
+        }
+
+        return "redirect:/?idCliente=" + idCliente;
+    }
+
     @PostMapping("/finalizarPedido/{numeroPedido}")
     public String finalizarPedido(@RequestParam(name = "idCliente", required = false) String idCliente,
             @PathVariable String numeroPedido, @ModelAttribute PedidoDTO pedidoDTO) {
         Pedido pedido = pedidoService.encontrarPedidoPorNumero(Integer.parseInt(numeroPedido));
 
         if (pedido != null) {
-            pedido.setStatus(StatusPedido.PAGAMENTO_CONFIRMADO);
+            pedido.setStatus(StatusPedido.FINALIZADO);
             pedido.setPagamento(pedidoDTO.formaPagamento());
             pedidoService.salvarPedido(pedido);
         }
 
-        System.out.println(idCliente);
         return "redirect:/?idCliente=" + idCliente;
     }
 }
