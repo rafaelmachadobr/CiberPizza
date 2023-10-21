@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,6 +15,7 @@ import br.unip.ciberpizza.service.ClienteService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
+@RequestMapping("/perfil")
 public class PerfilController {
     @Autowired
     private final ClienteService clienteService;
@@ -22,7 +24,7 @@ public class PerfilController {
         this.clienteService = clienteService;
     }
 
-    @GetMapping("/perfil")
+    @GetMapping
     public ModelAndView perfilCliente(@RequestParam(name = "idCliente", required = false) String idCliente) {
         if (idCliente != null) {
             Cliente cliente = clienteService.encontrarClientePorId(idCliente);
@@ -44,7 +46,7 @@ public class PerfilController {
         return "redirect:/";
     }
 
-    @PostMapping("/perfil/atualizar")
+    @PostMapping("/atualizar")
     public String atualizarEnderecoEntrega(
             @RequestParam(name = "idCliente", required = false) String idCliente,
             @ModelAttribute("atualizarPerfilDTO") AtualizarPerfilDTO atualizarPerfilDTO) {
