@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import br.unip.ciberpizza.model.ItemPedido;
 import br.unip.ciberpizza.model.Pedido;
+import br.unip.ciberpizza.model.Tamanho;
+import br.unip.ciberpizza.model.Tipo;
 import br.unip.ciberpizza.repository.ItemPedidoRepository;
 
 @Service
@@ -57,7 +59,21 @@ public class ItemPedidoService {
         double valorTotal = 0;
 
         for (ItemPedido itemPedido : itensPedido) {
-            valorTotal += itemPedido.getQuantidade() * itemPedido.getProduto().getValor();
+            Double precoItem = itemPedido.getProduto().getValor();
+            Tamanho tamanho = itemPedido.getTamanho();
+            Tipo tipo = itemPedido.getProduto().getTipo();
+
+            if (tamanho.equals(Tamanho.MEDIA) && tipo.equals(Tipo.PIZZA)) {
+                precoItem += 10;
+            } else if (tamanho.equals(Tamanho.GRANDE) && tipo.equals(Tipo.PIZZA)) {
+                precoItem += 20;
+            } else if (tamanho.equals(Tamanho.MEDIA) && tipo.equals(Tipo.BEBIDA)) {
+                precoItem += 2.5;
+            } else if (tamanho.equals(Tamanho.GRANDE) && tipo.equals(Tipo.BEBIDA)) {
+                precoItem += 5;
+            }
+
+            valorTotal += itemPedido.getQuantidade() * precoItem;
         }
 
         return valorTotal;

@@ -2,6 +2,7 @@ package br.unip.ciberpizza.service;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,7 +61,21 @@ public class PedidoService {
         pedidoRepository.deleteItemsByPedido(pedido);
     }
 
+    @Transactional
     public Pedido encontrarUltimoPedido(Cliente cliente) {
-        return pedidoRepository.findFirstByClienteOrderByNumeroDesc(cliente);
+        Pedido ultimoPedido = pedidoRepository.findFirstByClienteOrderByNumeroDesc(cliente);
+        if (ultimoPedido != null) {
+            Hibernate.initialize(ultimoPedido.getItens());
+        }
+        return ultimoPedido;
+    }
+
+    @Transactional
+    public int getNumeroDeItensNoPedido(Pedido pedido) {
+        if (pedido.getItens() != null) {
+            return pedido.getItens().size();
+        } else {
+            return 0;
+        }
     }
 }
