@@ -159,6 +159,128 @@
       </nav>
     </header>
 
+    <main class="bg-light-gray">
+      <div class="container py-5">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card mb-4">
+              <div class="card-body text-center">
+                <img
+                  src="https://www.forestcom.com.br/wp-content/uploads/2018/09/blank-profile-picture-973460_640.png"
+                  alt="avatar"
+                  class="rounded-circle img-fluid"
+                  style="width: 150px"
+                />
+                <h5 class="my-3" th:text="${cliente.nome}"></h5>
+                <p class="text-muted mb-1" th:text="${cliente.email}"></p>
+                <p
+                  class="text-muted mb-4"
+                  th:text="${cliente.enderecoEntrega}"
+                ></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="card mb-4">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Nome</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0" th:text="${cliente.nome}"></p>
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Email</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0" th:text="${cliente.email}">
+                      /p>
+                    </p>
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Telefone</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p
+                      class="text-muted mb-0"
+                      th:text="${cliente.telefone}"
+                    ></p>
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Celular</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p
+                      class="text-muted mb-0"
+                      th:text="${cliente.telefone}"
+                    ></p>
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Endereço</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p
+                      class="text-muted mb-0"
+                      th:text="${cliente.enderecoEntrega}"
+                    ></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card mb-4 mb-md-0">
+                  <div class="card-body">
+                    <h4 class="mb-4">Alterar dados</h4>
+                    <form
+                      class="p-1 needs-validation email-form"
+                      th:action="@{'/perfil/atualizar?idCliente=' + ${idCliente}}"
+                      method="post"
+                      novalidate
+                      th:object="${atualizarPerfilDTO}"
+                    >
+                      <div class="form-outline mb-4">
+                        <label for="enderecoEntrega" class="form-label"
+                          >Endereço</label
+                        >
+                        <textarea
+                          class="form-control"
+                          id="enderecoEntrega"
+                          th:field="*{enderecoEntrega}"
+                          name="enderecoEntrega"
+                          aria-describedby="enderecoEntregaHelp"
+                          placeholder="Digite seu endereço"
+                          required
+                        ></textarea>
+                        <div class="valid-feedback">Parece bom!</div>
+                        <div class="invalid-feedback">
+                          Por favor, digite seu endereço válido.
+                        </div>
+                      </div>
+                      <button type="submit" class="btn w-100">Alterar</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
     <footer id="footer" class="footer">
       <div class="container">
         <div class="row gy-3">
