@@ -69,6 +69,24 @@ img {
   border-color: #005f32;
 }
 
+.btn-yellow {
+  background-color: #ffc107;
+}
+
+.btn-yellow:hover {
+  color: #ffc107;
+  border-color: #ffc107;
+}
+
+.bg-blue {
+  background-color: #007bff;
+}
+
+.bg-blue:hover {
+  color: #007bff;
+  border-color: #007bff;
+}
+
 header {
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }

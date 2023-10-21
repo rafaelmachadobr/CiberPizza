@@ -85,21 +85,21 @@
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  th:href="@{'/#sobre?idCliente=' + ${idCliente}}"
+                  th:href="@{'/?idCliente=' + ${idCliente} + '#sobre'}"
                   >Sobre</a
                 >
               </li>
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  th:href="@{'/#cardapio?idCliente=' + ${idCliente}}"
+                  th:href="@{'/?idCliente=' + ${idCliente} + '#cardapio'}"
                   >Cardápio
                 </a>
               </li>
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  th:href="@{'/#avaliacoes?idCliente=' + ${idCliente}}"
+                  th:href="@{'/?idCliente=' + ${idCliente} + '#avaliacoes'}"
                   >Avaliações</a
                 >
               </li>
@@ -144,7 +144,11 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/#contato">Contato</a>
+                <a
+                  class="nav-link"
+                  th:href="@{'/?idCliente=' + ${idCliente} + '#contato'}"
+                  >Contato</a
+                >
               </li>
             </ul>
             <a class="btn" th:href="@{'/carrinho?idCliente=' + ${idCliente}}">
@@ -187,7 +191,11 @@
                           <h5 class="card-title" th:text="${produto.nome}">
                             Nome da Pizza
                           </h5>
-                          <p class="card-text" th:text="${produto.descricao}">
+                          <p
+                            class="card-text d-inline-block text-truncate"
+                            style="max-width: 100%"
+                            th:text="${produto.descricao}"
+                          >
                             Descrição da Pizza
                           </p>
                         </div>
@@ -276,6 +284,17 @@
                     class="badge bg-success fs-5"
                     th:text="'R$ ' + ${#numbers.formatDecimal(valorTotal, 1, 'POINT', 2, 'COMMA')}"
                   ></span>
+                </div>
+              </div>
+              <div class="card-body bg-light">
+                <div class="align-middle text-center p-3">
+                  <p>Mudei de ideia, quero cancelar o pedido</p>
+                  <a
+                    class="btn btn-lg btn-block"
+                    th:href="@{'/pedido/cancelarPedido/' + ${numeroPedido} + '?idCliente=' + ${idCliente}}"
+                  >
+                    Cancelar Pedido <i class="fas fa-times"></i>
+                  </a>
                 </div>
               </div>
               <div class="card-footer bg-transparent">

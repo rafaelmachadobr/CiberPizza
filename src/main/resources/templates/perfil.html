@@ -85,21 +85,21 @@
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  th:href="@{'/#sobre?idCliente=' + ${idCliente}}"
+                  th:href="@{'/?idCliente=' + ${idCliente} + '#sobre'}"
                   >Sobre</a
                 >
               </li>
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  th:href="@{'/#cardapio?idCliente=' + ${idCliente}}"
+                  th:href="@{'/?idCliente=' + ${idCliente} + '#cardapio'}"
                   >Cardápio
                 </a>
               </li>
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  th:href="@{'/#avaliacoes?idCliente=' + ${idCliente}}"
+                  th:href="@{'/?idCliente=' + ${idCliente} + '#avaliacoes'}"
                   >Avaliações</a
                 >
               </li>
@@ -144,7 +144,11 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/#contato">Contato</a>
+                <a
+                  class="nav-link"
+                  th:href="@{'/?idCliente=' + ${idCliente} + '#contato'}"
+                  >Contato</a
+                >
               </li>
             </ul>
             <a class="btn" th:href="@{'/carrinho?idCliente=' + ${idCliente}}">
