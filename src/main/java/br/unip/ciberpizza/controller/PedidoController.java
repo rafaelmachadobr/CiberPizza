@@ -217,7 +217,7 @@ public class PedidoController {
             pedidoService.salvarPedido(pedido);
         }
 
-        return "redirect:/?idCliente=" + idCliente;
+        return "redirect:/historico?idCliente=" + idCliente;
     }
 
     @PostMapping("/finalizarPedido/{numeroPedido}")
@@ -231,6 +231,6 @@ public class PedidoController {
             pedidoService.salvarPedido(pedido);
         }
 
-        return "redirect:/?idCliente=" + idCliente;
+        return "redirect:/historico?idCliente=" + idCliente;
     }
 }
