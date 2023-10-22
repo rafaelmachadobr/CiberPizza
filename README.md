@@ -1,15 +1,14 @@
 <h1 align="center"> CiberPizza 🍕 </h1>
 
 <p align="center">
-    <a href="#descrição-do-projeto-📄">Descrição do Projeto</a> •
-    <a href="#objetivos-🚀">Objetivos</a> •
-    <a href="#integrantes-do-grupo-👥">Integrantes do Grupo</a> •
-    <a href="#casos-de-uso-📋">Casos de Uso</a> •
+    <a href="#descrição-do-projeto-">Descrição do Projeto</a> •
+    <a href="#objetivos-">Objetivos</a> •
+    <a href="#integrantes-do-grupo-">Integrantes do Grupo</a> •
+    <a href="#casos-de-uso-">Casos de Uso</a> •
     <a href="#especificações-dos-casos-de-uso">Especificações dos Casos de Uso</a> •
-    <a href="#diagrama-de-classes-🧩">Diagrama de Classes</a> •
-    <a href="#tecnologias-utilizadas-💻">Tecnologias Utilizadas</a> •
-    <a href="#configuração-e-execução-🛠️">Configuração e Execução</a> •
-    <a href="#licença-📜">Licença</a>
+    <a href="#diagrama-de-classes-">Diagrama de Classes</a> •
+    <a href="#tecnologias-utilizadas-">Tecnologias Utilizadas</a> •
+    <a href="#licença-">Licença</a>
 </p>
 
 ## Descrição do Projeto 📄
