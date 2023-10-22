@@ -34,7 +34,7 @@ INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES (UUID(
 
 -- Inserindo pizzas veganas no produtos
 
-INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES (UUID(), 'Pizza de Brocolis ', 'Molho de tomate natural, queijo vegano, brócolis ao alho, 60.00', 'PIZZA', 'https://www.designi.com.br/images/preview/10059199.jpg');
+INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES (UUID(), 'Pizza de Brocolis ', 'Molho de tomate natural, queijo vegano, brócolis ao alho', 60.00, 'PIZZA', 'https://www.designi.com.br/images/preview/10059199.jpg');
 
 INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES (UUID(), 'Pizza de Margherita Vegana ', 'Molho de tomate natural, queijo vegano, folhas frescas de manjericão', 60.00, 'PIZZA', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmg8LpRC2YKa9glFMNWNTH6B7JP_PTJbEbBQ&usqp=CAU');
 
@@ -44,7 +44,7 @@ INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES (UUID(
 
 INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES (UUID(), 'Pizza de Carciofini ', 'Molho de tomate natural, alcachofras temperadas, orégano', 60.00, 'PIZZA', 'https://cloudfront-us-east-1.images.arcpublishing.com/estadao/SX4URWTSMVNGVOPFU5DNJSFZ3E.jpg');
 
-INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES (UUID(), 'Pizza de Alho e óleo ', 'Molho de tomate natural, alho dourado, orégano e queijo vegano, 60.00', 'PIZZA', 'https://www.chefwaldemar.com.br/img/cardapio/box/alho_e_oleo.jpg');
+INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES (UUID(), 'Pizza de Alho e óleo ', 'Molho de tomate natural, alho dourado, orégano e queijo vegano', 60.00, 'PIZZA', 'https://www.chefwaldemar.com.br/img/cardapio/box/alho_e_oleo.jpg');
 
 INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES (UUID(), 'Pizza de Berinjela', 'Molho de tomate fresco, berinjela vinagrete, cebola, muçarela e azeitonas', 60.00, 'PIZZA', 'https://anamariabrogui.com.br/assets/uploads/receitas/fotos/usuario-2124-f5e3aedb7d1bab12871cc70d4282c76e.jpg');
 
@@ -62,7 +62,7 @@ INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES (UUID(
 
 INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES (UUID(), 'Pizza de Banana ', 'Banana, leite condensado e canela em pó', 60.00, 'PIZZA', 'https://t2.uc.ltmcdn.com/pt/posts/4/8/1/como_fazer_pizza_de_banana_27184_orig.jpg');
 
-INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES (UUID(), 'Pizza de Brigadeiro ', 'Chocolate ao leite Nestlé salpicado com chocolate granulado, 60.00', 'PIZZA', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPTWm33opqvHmt_OuF32bZZszdX3We_w9dvg&usqp=CAU');
+INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES (UUID(), 'Pizza de Brigadeiro ', 'Chocolate ao leite Nestlé salpicado com chocolate granulado', 60.00, 'PIZZA', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPTWm33opqvHmt_OuF32bZZszdX3We_w9dvg&usqp=CAU');
 
 INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES (UUID(), 'Pizza de Chocolate', 'Chocolate ao leite Nestlé', 60.00, 'PIZZA', 'https://www.designi.com.br/images/preview/10142661.jpg');
 

@@ -79,7 +79,7 @@ public class PedidoController {
                         ModelAndView modelAndView = new ModelAndView("pedido");
                         modelAndView.addObject("itemPedidoDTO", new ItemPedidoDTO(1, null));
                         modelAndView.addObject("listaProdutos",
-                                produtoService.listarProdutosOrdenadosPorTipoDecrescente());
+                                produtoService.listarProdutosOrdenadosPorTipoDecrescenteENomeCrescente());
                         modelAndView.addObject("listaPedidos",
                                 itemPedidoService.encontrarItensPedidoPorPedido(ultimoPedido));
                         modelAndView.addObject("idCliente", idCliente);
