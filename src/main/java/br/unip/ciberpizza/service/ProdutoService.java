@@ -27,6 +27,10 @@ public class ProdutoService {
         return produtoRepository.findAll();
     }
 
+    public List<Produto> listarProdutosOrdenadosPorTipoDecrescente() {
+        return produtoRepository.findAllOrderedByTipo();
+    }
+
     public List<Produto> listarPizzas() {
         List<Produto> pizzas = new ArrayList<>();
         List<Produto> produtos = produtoRepository.findAll();

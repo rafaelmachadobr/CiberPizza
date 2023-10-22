@@ -182,6 +182,12 @@
                         <img
                           th:src="${produto.urlImagem}"
                           class="card-img-top"
+                          style="
+                            min-height: 300px;
+                            min-width: 200px;
+                            object-fit: cover;
+                            display: block;
+                          "
                           alt="Imagem da Pizza"
                         />
                         <div
@@ -417,7 +423,8 @@
             <div class="row">
               <div class="col">
                 <img
-                  class="img-fluid"
+                  class="img-fluid h-100"
+                  style="object-fit: cover; display: block"
                   th:src="${produto.urlImagem}"
                   alt="Imagem do Produto"
                 />
