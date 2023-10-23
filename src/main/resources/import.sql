@@ -70,6 +70,14 @@ INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES (UUID(
 
 INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES (UUID(), 'Pizza de Romeu e Julieta ', 'Queijo muçarela e goiabada', 60.00, 'PIZZA', 'https://receitinhas.com.br/wp-content/uploads/2022/04/Pizza-de-Roemu-e-Julieta-Imagem-por-Restaurante-Braseiro.jpg');
 
+INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES (UUID(), 'Pizza de Abacaxi com Coco', 'Pedaços de abacaxi, raspas e pedaços de coco envolvidos por uma calda quente de abacaxi.', 60.00, 'PIZZA', ' https://receitasdepizza.com.br/wp-content/uploads/2023/02/Pizza-Doce-Pizza-de-Coco-com-Abacaxi-Caramelizado.webp ');
+
+INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES (UUID(), 'Pizza de Cheesecake de framboesa', 'Creme de queijo, framboesas frescas e calda de framboesa.', 60.00, 'PIZZA', ' https://receitasdepizza.com.br/wp-content/uploads/2023/02/Pizza-Doce-Pizza-de-Framboesa.webp');
+
+-- Inserindo pizzas especiais no produtos
+
+INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES (UUID(), 'Pizza de Delícia Azul de Mirtilos', 'Molho da casa, queijo naturalmente modificado, xarope de mirtilo e calda de blueberry.', 60.00, 'PIZZA', ' https://receitasdepizza.com.br/wp-content/uploads/2023/02/Mito-Pizza-de-Queijo-Azul.webp');
+
 -- Inserindo bebidas no produtos
 INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES (UUID(), 'Coca-Cola', 'Refrigerante de cola', 5.00, 'BEBIDA', 'https://assets.vtex.app/unsafe/1020x930/center/middle/https%3A%2F%2Fcarrefourbrfood.vtexassets.com%2Farquivos%2Fids%2F118271106%2Frefrigerante-coca-cola-garrafa-2-l-1.jpg%3Fv%3D638217385053270000');
 INSERT INTO produto (id, nome, descricao, valor, tipo, url_imagem) VALUES (UUID(), 'Guaraná', 'Refrigerante de guaraná', 5.00, 'BEBIDA', 'https://assets.vtex.app/unsafe/1020x930/center/middle/https%3A%2F%2Fcarrefourbrfood.vtexassets.com%2Farquivos%2Fids%2F106437032%2Frefrigerante-guarana-antarctica-garrafa-2l-1.jpg%3Fv%3D638144885863600000');

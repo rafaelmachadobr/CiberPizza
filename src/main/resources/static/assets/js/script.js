@@ -154,16 +154,4 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-
-  $("select#tamanho").change(function () {
-    var tamanho = $(this).val();
-    var valorPizza = $("#valor-pizza").val();
-
-    console.log(tamanho);
-    console.log(valorPizza);
-  });
-
-  $("input#quantidade").ready(function () {
-    var quantidade = $(this).val(1);
-  });
 });

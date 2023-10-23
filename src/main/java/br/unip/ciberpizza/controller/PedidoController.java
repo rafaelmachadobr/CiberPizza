@@ -209,11 +209,9 @@ public class PedidoController {
     public String cancelarPedido(@RequestParam(name = "idCliente", required = false) String idCliente,
             @PathVariable String numeroPedido) {
         Pedido pedido = pedidoService.encontrarPedidoPorNumero(Integer.parseInt(numeroPedido));
-        Double valorTotal = itemPedidoService
-                .calcularValorTotal(itemPedidoService.encontrarItensPedidoPorPedido(pedido));
 
         if (pedido != null) {
-            pedido.setValor(valorTotal + 10);
+            pedido.setValor(0.0);
             pedido.setStatus(StatusPedido.CANCELADO);
             pedidoService.salvarPedido(pedido);
         }

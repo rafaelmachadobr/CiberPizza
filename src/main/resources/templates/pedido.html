@@ -431,9 +431,18 @@
               </div>
               <div class="col">
                 <p th:text="${produto.descricao}"></p>
-                <p
-                  th:text="'Valor: R$ ' + ${#numbers.formatDecimal(produto.valor, 1, 'POINT', 2, 'COMMA')}"
-                ></p>
+                <p>
+                  Valor:
+                  <span
+                    class="green-text"
+                    th:text="'R$ ' + ${#numbers.formatDecimal(produto.valor, 1, 'POINT', 2, 'COMMA')}"
+                  ></span>
+                </p>
+                <p class="small mt-0">
+                  <i class="fas fa-info-circle"></i> O valor da pizza pode
+                  variar de acordo com o tamanho escolhido. O valor exibido é
+                  referente ao tamanho Pequeno.
+                </p>
                 <div class="form-outline mb-4">
                   <label for="quantidade" class="form-label">Tamanho</label>
                   <select

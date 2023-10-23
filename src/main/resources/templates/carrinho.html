@@ -213,7 +213,9 @@
                               />
                             </div>
                             <div class="ms-3">
-                              <h5 th:text="${item.produto.nome}">
+                              <h5
+                                th:text="${item.produto.nome + ' - ' + {item.tamanho.name() == 'MEDIA' ? 'Média' : item.tamanho.name() == 'GRANDE' ? 'Grande' : 'Pequena'}}"
+                              >
                                 Nome do Item
                               </h5>
                               <p
@@ -227,6 +229,7 @@
                           </div>
                           <div class="d-flex flex-row align-items-center">
                             <div style="width: 50px">
+                              <p class="small mb-0">Qtd.</p>
                               <h5
                                 class="fw-normal mb-0"
                                 th:text="${item.quantidade}"
@@ -237,10 +240,10 @@
                             <div style="width: 100px">
                               <h5
                                 class="mb-0"
-                                th:text="'R$ ' + ${#numbers.formatDecimal(item.produto.valor, 1, 'POINT', 2, 'COMMA')}"
-                              >
-                                $0.00
-                              </h5>
+                                th:with="novoValor=${item.tamanho.name() == 'MEDIA' ? item.produto.valor + 10 : item.tamanho.name() == 'GRANDE' ? item.produto.valor + 20 : item.produto.valor}"
+                                th:text="'R$ ' + ${#numbers.formatDecimal(novoValor, 1, 'POINT', 2, 'COMMA')}"
+                              ></h5>
+                              <p class="small mb-0">Cad. Unidade</p>
                             </div>
                             <div class="ms-3">
                               <a
