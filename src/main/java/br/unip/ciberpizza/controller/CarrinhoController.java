@@ -64,6 +64,7 @@ public class CarrinhoController {
                         modelAndView.addObject("itensPedido", itensPedido);
                         modelAndView.addObject("pedidoDTO", new PedidoDTO(null));
                         modelAndView.addObject("numeroPedido", ultimoPedido.getNumero());
+                        modelAndView.addObject("cliente", cliente);
 
                         Double valorTotal = itemPedidoService.calcularValorTotal(itensPedido);
                         ultimoPedido.setValor(valorTotal + 10);
