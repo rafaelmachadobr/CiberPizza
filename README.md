@@ -28,7 +28,7 @@ Nossa principal missão neste projeto é aplicar os conceitos de programação o
 
 ## Casos de Uso 📋
 
-![Diagrama de Casos de Uso](./docs/diagrama-casos-uso.jpg)
+![Diagrama de Casos de Uso](./.github/docs/diagrama-casos-uso.jpg)
 
 ## Especificações dos Casos de Uso
 
@@ -110,7 +110,7 @@ Nossa principal missão neste projeto é aplicar os conceitos de programação o
 
 ## Diagrama de Classes 🧩
 
-![Diagrama de Classes](./docs/diagrama-classes.jpg)
+![Diagrama de Classes](./.github/docs/diagrama-classes.jpg)
 
 ## Tecnologias Utilizadas 💻
 
